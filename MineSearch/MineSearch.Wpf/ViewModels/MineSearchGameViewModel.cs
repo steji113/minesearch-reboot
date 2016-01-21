@@ -80,7 +80,7 @@ namespace MineSearch.Wpf.ViewModels
             var cellViewModels = new Matrix<ICellViewModel>(Game.Rows, Game.Columns);
             foreach (var cell in Game.Cells)
             {
-                var viewModel = new CellViewModel(cell);
+                var viewModel = new CellViewModel(Game, cell);
                 cellViewModels[cell.Coordinates.X, cell.Coordinates.Y] = viewModel;
             }
             CellViewModels = cellViewModels;

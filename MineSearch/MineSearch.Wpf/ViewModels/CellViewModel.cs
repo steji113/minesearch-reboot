@@ -24,17 +24,33 @@ namespace MineSearch.Wpf.ViewModels
         #region Propertes
 
         /// <summary>
+        /// Game instance the cell belongs to.
+        /// </summary>
+        public IMineSearchGame Game { get; private set; }
+
+        /// <summary>
         /// Cell.
         /// </summary>
         public ICell Cell { get; private set; }
 
         #endregion
 
-        public CellViewModel(ICell cell)
+        public CellViewModel(IMineSearchGame game, ICell cell)
         {
+            Game = game;
             Cell = cell;
-            FlagCommand = new DelegateCommand(Cell.Flag);
-            RevealCommand = new DelegateCommand(Cell.Reveal);
+            FlagCommand = new DelegateCommand(FlagCell);
+            RevealCommand = new DelegateCommand(RevealCell);
+        }
+
+        private void FlagCell()
+        {
+            Game.FlagCell(Cell.Coordinates);
+        }
+
+        private void RevealCell()
+        {
+            Game.RevealCell(Cell.Coordinates);
         }
 
         #region Fields

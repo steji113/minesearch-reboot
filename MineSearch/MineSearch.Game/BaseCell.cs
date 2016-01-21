@@ -7,11 +7,6 @@ namespace MineSearch.Game
         #region Properties
 
         /// <summary>
-        /// The <see cref="IMineSearchGame"/> this cell belongs to.
-        /// </summary>
-        public IMineSearchGame Game { get; set; }
-
-        /// <summary>
         /// Cell coordinates.
         /// </summary>
         public Point Coordinates { get { return _coordinates; } }
@@ -31,22 +26,6 @@ namespace MineSearch.Game
         protected BaseCell(Point coordinates)
         {
             _coordinates = coordinates;
-        }
-
-        /// <summary>
-        /// Flags the cell.
-        /// </summary>
-        public void Flag()
-        {
-            Game.FlagCell(Coordinates);
-        }
-
-        /// <summary>
-        /// Reveals the cell.
-        /// </summary>
-        public void Reveal()
-        {
-            Game.RevealCell(Coordinates);
         }
 
         #region Fields

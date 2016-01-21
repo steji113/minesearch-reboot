@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MineSearch.Common;
 using MineSearch.Game;
 using MineSearch.Wpf.ViewModels;
 using Moq;
@@ -12,21 +13,35 @@ namespace MineSearch.Wpf.Test
         [TestMethod]
         public void TestFlagCommand()
         {
+            // Mock a game and cell
+            var mockGame = new Mock<IMineSearchGame>();
             var mockCell = new Mock<ICell>();
-            mockCell.Setup(c => c.Flag());
-            var cellViewModel = new CellViewModel(mockCell.Object);
+
+            // Setup the game's flag cell method
+            mockGame.Setup(g => g.FlagCell(It.IsAny<Point>()));
+
+            // Create the view model and execute the flag command
+            var cellViewModel = new CellViewModel(mockGame.Object, mockCell.Object);
             cellViewModel.FlagCommand.Execute(null);
-            mockCell.Verify(c => c.Flag(), Times.Once());
+
+            mockGame.Verify(g => g.FlagCell(It.IsAny<Point>()), Times.Once());
         }
 
         [TestMethod]
         public void TestRevealCommand()
         {
+            // Mock a game and cell
+            var mockGame = new Mock<IMineSearchGame>();
             var mockCell = new Mock<ICell>();
-            mockCell.Setup(c => c.Reveal());
-            var cellViewModel = new CellViewModel(mockCell.Object);
+
+            // Setup the game's reveal cell method
+            mockGame.Setup(g => g.RevealCell(It.IsAny<Point>()));
+
+            // Create the view model and execute the flag command
+            var cellViewModel = new CellViewModel(mockGame.Object, mockCell.Object);
             cellViewModel.RevealCommand.Execute(null);
-            mockCell.Verify(c => c.Reveal(), Times.Once());
+
+            mockGame.Verify(g => g.RevealCell(It.IsAny<Point>()), Times.Once());
         }
 
     }

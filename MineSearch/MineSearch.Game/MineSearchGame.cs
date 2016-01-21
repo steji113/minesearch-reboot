@@ -55,11 +55,6 @@ namespace MineSearch.Game
         public MineSearchGame(IMatrix<ICell> cells)
         {
             Cells = cells;
-            // Assign each cell to this game instance.
-            foreach (var cell in Cells)
-            {
-                cell.Game = this;
-            }
         }
 
         /// <summary>
