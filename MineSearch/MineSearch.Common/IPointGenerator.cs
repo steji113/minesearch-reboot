@@ -3,26 +3,26 @@
 namespace MineSearch.Common
 {
     /// <summary>
-    /// Defines an interface for defining a random <see cref="Point"/>.
+    /// Defines an interface for generating a <see cref="Point"/>.
     /// </summary>
-    public interface IRandomPointGenerator
+    public interface IPointGenerator
     {
         /// <summary>
-        /// Generates a random point.
+        /// Generates a point.
         /// </summary>
         /// <param name="maxRow">Maximum row.</param>
         /// <param name="maxColumn">Maximum column.</param>
-        /// <returns>Random point.</returns>
-        Point Generate(int maxRow, int maxColumn);
+        /// <returns>Point.</returns>
+        Point Generate();
 
         /// <summary>
-        /// Generates a collection of random points.
+        /// Generates a collection of points.
         /// </summary>
         /// <param name="numPoints">Number of points to generate.</param>
         /// <param name="maxRow">Maximum row.</param>
         /// <param name="maxColumn">Maximum column.</param>
-        /// <returns></returns>
-        ICollection<Point> Generate(int numPoints, int maxRow, int maxColumn);
+        /// <returns>Collection of points.</returns>
+        ICollection<Point> Generate(int numPoints);
     }
 
 }

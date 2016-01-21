@@ -201,12 +201,12 @@ namespace MineSearch.Common
         {
             if (y < 0 || y >= Rows)
             {
-                throw new ArgumentOutOfRangeException("y",
+                throw new ArgumentOutOfRangeException("y", y,
                     "Y coordinate is not a valid index in the matrix");
             }
             if (x < 0 || x >= Columns)
             {
-                throw new ArgumentOutOfRangeException("x",
+                throw new ArgumentOutOfRangeException("x", x,
                     "X coordinate is not a valid index in the matrix");
             }
         }

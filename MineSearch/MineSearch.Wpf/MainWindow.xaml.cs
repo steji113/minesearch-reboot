@@ -29,10 +29,9 @@ namespace MineSearch.Wpf
             // Create some simple game settings
             var gameSettings = new GameSettings(2, 2, 1);
             // Use the default random number generator
-            IRandomPointGenerator rndGen = new DefaultRandomPointGenerator();
-            var cellFactory = new MineSearchCellsFactory();
-            var cells = cellFactory.CreateCells(gameSettings, rndGen);
-            var game = new MineSearchGame(cells);
+            IPointGenerator rndGen = new RandomPointGenerator(2, 2);
+            var cellFactory = new MineSearchCellsFactory(gameSettings, rndGen);
+            var game = new MineSearchGame(cellFactory);
         }
     }
 }

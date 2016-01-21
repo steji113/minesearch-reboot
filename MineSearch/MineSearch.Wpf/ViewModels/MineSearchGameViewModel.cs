@@ -59,9 +59,9 @@ namespace MineSearch.Wpf.ViewModels
         #endregion
 
         public MineSearchGameViewModel(IGameSettings gameSettings,
-            IRandomPointGenerator randomGenerator)
+            IPointGenerator generator)
         {
-            _randomGenerator = randomGenerator;
+            _generator = generator;
             NewGameCommand = new DelegateCommand(NewGame);
             NewGame(gameSettings);
         }
@@ -74,9 +74,8 @@ namespace MineSearch.Wpf.ViewModels
         private void NewGame(IGameSettings gameSettings)
         {
             GameSettings = gameSettings;
-            var cellFactory = new MineSearchCellsFactory();
-            var cells = cellFactory.CreateCells(gameSettings, _randomGenerator);
-            Game = new MineSearchGame(cells);
+            var cellFactory = new MineSearchCellsFactory(gameSettings, _generator);
+            Game = new MineSearchGame(cellFactory);
             var cellViewModels = new Matrix<ICellViewModel>(Game.Rows, Game.Columns);
             foreach (var cell in Game.Cells)
             {
@@ -90,7 +89,7 @@ namespace MineSearch.Wpf.ViewModels
 
         private IMineSearchGame _game;
         private IMatrix<ICellViewModel> _cellViewModels;
-        private readonly IRandomPointGenerator _randomGenerator;
+        private readonly IPointGenerator _generator;
 
         #endregion
     }

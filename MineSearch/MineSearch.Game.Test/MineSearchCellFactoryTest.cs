@@ -8,10 +8,6 @@ namespace MineSearch.Game.Test
     [TestClass]
     public class MineSearchCellFactoryTest
     {
-        public MineSearchCellFactoryTest()
-        {
-            _cellsFactory = new MineSearchCellsFactory();
-        }
 
         [TestMethod]
         public void TestCreateCellsMinePlacement()
@@ -27,18 +23,16 @@ namespace MineSearch.Game.Test
                 new Point(2, 1),
                 new Point(2, 2)
             };
-            IRandomPointGenerator generator = new MockRandomPointGenerator(desiredCoords);
-
+            IPointGenerator generator = new DeterminatePointGenerator(2, 2, desiredCoords);
+            var cellFactory = new MineSearchCellsFactory(gameSettings, generator);
             // Create the cells via factory method.
-            IMatrix<ICell> cells = _cellsFactory.CreateCells(gameSettings, generator);
+            IMatrix<ICell> cells = cellFactory.CreateCells();
 
             // Ensure that the mine cells were placed where we wanted.
             var actualCoords =
                 cells.Where(cell => cell is MineCell).Select(cell => cell.Coordinates);
             Assert.IsTrue(desiredCoords.ContainsAll(actualCoords));
         }
-
-        private readonly IMineSearchCellsFactory _cellsFactory;
 
     }
 }

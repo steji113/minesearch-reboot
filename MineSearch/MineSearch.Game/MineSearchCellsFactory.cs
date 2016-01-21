@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using MineSearch.Common;
+﻿using MineSearch.Common;
 
 namespace MineSearch.Game
 {
@@ -8,29 +7,31 @@ namespace MineSearch.Game
     /// </summary>
     public class MineSearchCellsFactory : IMineSearchCellsFactory
     {
+
+        public MineSearchCellsFactory(IGameSettings gameSettings,
+            IPointGenerator pointGenerator)
+        {
+            _gameSettings = gameSettings;
+            _pointGenerator = pointGenerator;
+        }
+
         /// <summary>
         /// Creates a matrix of cells.
         /// </summary>
-        /// <param name="gameSettings">Game settings.</param>
-        /// <param name="randomGenerator">
-        /// Random point generator to use when placing mine cells.
-        /// </param>
         /// <returns>Matrix of cells.</returns>
-        public IMatrix<ICell> CreateCells(IGameSettings gameSettings, 
-            IRandomPointGenerator randomGenerator)
+        public IMatrix<ICell> CreateCells()
         {
             // Create the matrix of cells.
-            var cells = new Matrix<ICell>(gameSettings.Rows, gameSettings.Columns);
+            var cells = new Matrix<ICell>(_gameSettings.Rows, _gameSettings.Columns);
             // Populate the cell matrix with cells.
-            for (int i = 0; i < gameSettings.Rows * gameSettings.Columns; i++)
+            for (int i = 0; i < _gameSettings.Rows * _gameSettings.Columns; i++)
             {
-                var point = Point.FromIndex(i, gameSettings.Columns);
+                var point = Point.FromIndex(i, _gameSettings.Columns);
                 cells[point.X, point.Y] = new SafeCell(point);
             }
 
             // Populate a list of random points where mines will be placed.
-            var mineCoordinates = randomGenerator.Generate(gameSettings.MineCount,
-                gameSettings.Rows - 1, gameSettings.Columns - 1);
+            var mineCoordinates = _pointGenerator.Generate(_gameSettings.MineCount);
 
             // Populate the cell matrix with mines.
             foreach (var mineCoordinate in mineCoordinates)
@@ -40,5 +41,12 @@ namespace MineSearch.Game
 
             return cells;
         }
+
+        #region Fields
+
+        private readonly IGameSettings _gameSettings;
+        private readonly IPointGenerator _pointGenerator;
+
+        #endregion
     }
 }

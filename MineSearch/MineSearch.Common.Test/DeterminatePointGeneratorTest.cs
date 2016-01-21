@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace MineSearch.Common.Test
 {
     [TestClass]
-    public class MockRandomNumberGeneratorTest
+    public class DeterminatePointGeneratorTest
     {
         [TestMethod]
         public void TestGenerate()
@@ -13,16 +13,16 @@ namespace MineSearch.Common.Test
             var points = new List<Point>
             {
                 new Point(0, 0),
-                new Point(1, 1),
-                new Point(1, 2),
-                new Point(2, 2)
+                new Point(0, 1),
+                new Point(1, 0),
+                new Point(1, 1)
             };
 
-            var generator = new MockRandomPointGenerator(points);
+            var generator = new DeterminatePointGenerator(2, 2, points);
             var generated = new List<Point>(points.Count);
             for (int i = 0; i < points.Count; i++)
             {
-                generated.Add(generator.Generate(2, 2));
+                generated.Add(generator.Generate());
             }
 
             Assert.IsTrue(points.SequenceEqual(generated));

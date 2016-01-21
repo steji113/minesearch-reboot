@@ -52,9 +52,9 @@ namespace MineSearch.Game
 
         #endregion
 
-        public MineSearchGame(IMatrix<ICell> cells)
+        public MineSearchGame(IMineSearchCellsFactory cellsFactory)
         {
-            Cells = cells;
+            Cells = cellsFactory.CreateCells();
         }
 
         /// <summary>

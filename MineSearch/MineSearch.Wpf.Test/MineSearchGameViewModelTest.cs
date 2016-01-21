@@ -12,8 +12,8 @@ namespace MineSearch.Wpf.Test
         public void TestInitialize()
         {
             _gameSettings = new GameSettings(4, 4, 4);
-            _randomGenerator = new DefaultRandomPointGenerator();
-            _gameViewModel = new MineSearchGameViewModel(_gameSettings, _randomGenerator);
+            _generator = new RandomPointGenerator(4, 4);
+            _gameViewModel = new MineSearchGameViewModel(_gameSettings, _generator);
         }
 
         [TestMethod]
@@ -43,6 +43,6 @@ namespace MineSearch.Wpf.Test
 
         private IGameSettings _gameSettings;
         private IMineSearchGameViewModel _gameViewModel;
-        private IRandomPointGenerator _randomGenerator;
+        private IPointGenerator _generator;
     }
 }

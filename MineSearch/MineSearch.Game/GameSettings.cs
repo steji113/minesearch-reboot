@@ -26,22 +26,22 @@ namespace MineSearch.Game
         {
             if (rows <= 0)
             {
-                throw new ArgumentOutOfRangeException("rows", 
+                throw new ArgumentOutOfRangeException("rows", rows,
                     "row count must be greater than zero");
             }
             if (columns <= 0)
             {
-                throw new ArgumentOutOfRangeException("columns",
+                throw new ArgumentOutOfRangeException("columns", columns,
                     "column count must be greater than zero");
             }
             if (mineCount <= 0)
             {
-                throw new ArgumentOutOfRangeException("mineCount",
+                throw new ArgumentOutOfRangeException("mineCount", mineCount,
                     "mine count must be greater than zero");
             }
             if (mineCount > rows * columns)
             {
-                throw new ArgumentOutOfRangeException("mineCount",
+                throw new ArgumentOutOfRangeException("mineCount", mineCount,
                     "mine count cannot be greater than the number of cells");
             }
 

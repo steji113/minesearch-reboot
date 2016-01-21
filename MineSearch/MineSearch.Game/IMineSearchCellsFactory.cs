@@ -11,12 +11,6 @@ namespace MineSearch.Game
         /// <summary>
         /// Creates a matrix of cells.
         /// </summary>
-        /// <param name="gameSettings">Game settings.</param>
-        /// <param name="randomGenerator">
-        /// Random point generator to use when placing mine cells.
-        /// </param>
-        /// <returns>Matrix of cells.</returns>
-        IMatrix<ICell> CreateCells(IGameSettings gameSettings,
-            IRandomPointGenerator randomGenerator);
+        IMatrix<ICell> CreateCells();
     }
 }

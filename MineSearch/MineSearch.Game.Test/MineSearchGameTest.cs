@@ -14,13 +14,11 @@ namespace MineSearch.Game.Test
             // Create some simple game settings.
             _gameSettings = new GameSettings(4, 4, 4);
             // Use the default random point generator.
-           _randomPointGenerator = new DefaultRandomPointGenerator();
+           _pointGenerator = new RandomPointGenerator(4, 4);
             // Use the default cell factory.
-            _cellFactory = new MineSearchCellsFactory();
-            // Create the cells via factory method.
-            _cells = _cellFactory.CreateCells(_gameSettings, _randomPointGenerator);
+            var cellFactory = new MineSearchCellsFactory(_gameSettings, _pointGenerator);
             // Create a new instance of a game.
-            _game = new MineSearchGame(_cells);
+            _game = new MineSearchGame(cellFactory);
         }
 
         [TestMethod]
@@ -32,7 +30,7 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestRemoveFlag()
         {
-            var cellToFlag = _cells.First(cell => cell is SafeCell);
+            var cellToFlag = _game.Cells.First(cell => cell is SafeCell);
             _game.FlagCell(cellToFlag.Coordinates);
             _game.RemoveFlag(cellToFlag.Coordinates);
             
@@ -42,7 +40,7 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestFlagSafeCell()
         {
-            var cellToFlag = _cells.First(cell => cell is SafeCell);
+            var cellToFlag = _game.Cells.First(cell => cell is SafeCell);
             _game.FlagCell(cellToFlag.Coordinates);
 
             Assert.IsTrue(cellToFlag.Flagged);
@@ -55,7 +53,7 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestFlagMineCell()
         {
-            var cellToFlag = _cells.First(cell => cell is MineCell);
+            var cellToFlag = _game.Cells.First(cell => cell is MineCell);
             _game.FlagCell(cellToFlag.Coordinates);
 
             Assert.IsTrue(cellToFlag.Flagged);
@@ -68,7 +66,7 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestRevealSafeCell()
         {
-            var cellToReveal = _cells.First(cell => cell is SafeCell);
+            var cellToReveal = _game.Cells.First(cell => cell is SafeCell);
             _game.RevealCell(cellToReveal.Coordinates);
 
             Assert.IsTrue(cellToReveal.Revealed);
@@ -79,7 +77,7 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestRevealMineCell()
         {
-            var cellToReveal = _cells.First(cell => cell is MineCell);
+            var cellToReveal = _game.Cells.First(cell => cell is MineCell);
             _game.RevealCell(cellToReveal.Coordinates);
 
             Assert.IsTrue(cellToReveal.Revealed);
@@ -91,8 +89,9 @@ namespace MineSearch.Game.Test
         public void TestWinGameTiny()
         {
             IGameSettings tinyGameSettings = new GameSettings(1, 1, 1);
-            IMatrix<ICell> cells = _cellFactory.CreateCells(tinyGameSettings, _randomPointGenerator);
-            IMineSearchGame tinyGame = new MineSearchGame(cells);
+            var pointGenerator = new RandomPointGenerator(1, 1);
+            var cellFactory = new MineSearchCellsFactory(tinyGameSettings, pointGenerator);
+            IMineSearchGame tinyGame = new MineSearchGame(cellFactory);
 
             tinyGame.FlagCell(new Point(0, 0));
 
@@ -104,11 +103,12 @@ namespace MineSearch.Game.Test
         public void TestWinGameSmall()
         {
             IGameSettings smallGameSettings = new GameSettings(3, 3, 3);
-            IMatrix<ICell> cells = _cellFactory.CreateCells(smallGameSettings, _randomPointGenerator);
-            IMineSearchGame smallGame = new MineSearchGame(cells);
+            var pointGenerator = new RandomPointGenerator(3, 3);
+            var cellFactory = new MineSearchCellsFactory(smallGameSettings, pointGenerator);
+            IMineSearchGame smallGame = new MineSearchGame(cellFactory);
 
             var mineCoordinates =
-                cells.Where(cell => cell is MineCell).Select(cell => cell.Coordinates);
+                smallGame.Cells.Where(cell => cell is MineCell).Select(cell => cell.Coordinates);
             foreach (var coordinate in mineCoordinates)
             {
                 smallGame.FlagCell(coordinate);
@@ -122,7 +122,7 @@ namespace MineSearch.Game.Test
         public void TestNonWin()
         {
             var safeCoordinates =
-                _cells.Where(cell => cell is SafeCell).Select(cell => cell.Coordinates);
+                _game.Cells.Where(cell => cell is SafeCell).Select(cell => cell.Coordinates);
             foreach (var coordinate in safeCoordinates)
             {
                 _game.FlagCell(coordinate);
@@ -144,14 +144,12 @@ namespace MineSearch.Game.Test
                 Assert.IsTrue(flagged);
             }
             // Ensure we cannot flag any more cells
-            var unflaggedCell = _cells.First(cell => !cell.Flagged);
+            var unflaggedCell = _game.Cells.First(cell => !cell.Flagged);
             Assert.IsFalse(_game.FlagCell(unflaggedCell.Coordinates));
         }
 
         private IGameSettings _gameSettings;
-        private IRandomPointGenerator _randomPointGenerator;
-        private IMatrix<ICell> _cells;
+        private IPointGenerator _pointGenerator;
         private IMineSearchGame _game;
-        private IMineSearchCellsFactory _cellFactory;
     }
 }
