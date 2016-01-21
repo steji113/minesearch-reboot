@@ -1,4 +1,6 @@
-﻿namespace MineSearch.Game
+﻿using System;
+
+namespace MineSearch.Game
 {
     /// <summary>
     /// Concrete implementation of <see cref="IGameSettings"/>.
@@ -22,7 +24,30 @@
 
         public GameSettings(int rows, int columns, int mineCount)
         {
-            
+            if (rows <= 0)
+            {
+                throw new ArgumentOutOfRangeException("rows", 
+                    "row count must be greater than zero");
+            }
+            if (columns <= 0)
+            {
+                throw new ArgumentOutOfRangeException("columns",
+                    "row count must be greater than zero");
+            }
+            if (mineCount <= 0)
+            {
+                throw new ArgumentOutOfRangeException("mineCount",
+                    "mine count must be greater than zero");
+            }
+            if (mineCount > rows * columns)
+            {
+                throw new ArgumentOutOfRangeException("mineCount",
+                    "mine count cannot be greater than the number of cells");
+            }
+
+            Rows = rows;
+            Columns = columns;
+            MineCount = mineCount;
         }
 
         /// <summary>
