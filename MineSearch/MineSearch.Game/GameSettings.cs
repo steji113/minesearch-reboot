@@ -32,7 +32,7 @@ namespace MineSearch.Game
             if (columns <= 0)
             {
                 throw new ArgumentOutOfRangeException("columns",
-                    "row count must be greater than zero");
+                    "column count must be greater than zero");
             }
             if (mineCount <= 0)
             {
