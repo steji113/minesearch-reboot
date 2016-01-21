@@ -1,48 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MineSearch.Common;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MineSearch.Game;
+using MineSearch.Wpf.ViewModels;
+using Moq;
 
 namespace MineSearch.Wpf.Test
 {
-
     [TestClass]
     public class CellViewModelTest
     {
-        [TestInitialize]
-        public void TestInitialize()
+
+        [TestMethod]
+        public void TestFlagCommand()
         {
-            // Create some simple game settings.
-            _gameSettings = new GameSettings
-            {
-                Rows = 4,
-                Columns = 4,
-                MineCount = 4
-            };
-            // Use the default random point generator.
-            _randomPointGenerator = new DefaultRandomPointGenerator();
-            // Use the default cell factory.
-            _cellFactory = new MineSearchCellsFactory();
-            // Create the cells via factory method.
-            _cells = _cellFactory.CreateCells(_gameSettings, _randomPointGenerator);
-            // Create a new instance of a game.
-            _game = new MineSearchGame(_cells);
+            var mockCell = new Mock<ICell>();
+            mockCell.Setup(c => c.Flag());
+            var cellViewModel = new CellViewModel(mockCell.Object);
+            cellViewModel.FlagCommand.Execute(null);
+            mockCell.Verify(c => c.Flag(), Times.Once());
         }
 
         [TestMethod]
-        public void TestFlagCell()
+        public void TestRevealCommand()
         {
-
+            var mockCell = new Mock<ICell>();
+            mockCell.Setup(c => c.Reveal());
+            var cellViewModel = new CellViewModel(mockCell.Object);
+            cellViewModel.RevealCommand.Execute(null);
+            mockCell.Verify(c => c.Reveal(), Times.Once());
         }
 
-        private IGameSettings _gameSettings;
-        private IRandomPointGenerator _randomPointGenerator;
-        private IMatrix<ICell> _cells;
-        private IMineSearchGame _game;
-        private IMineSearchCellsFactory _cellFactory;
     }
 }

@@ -33,18 +33,8 @@ namespace MineSearch.Wpf.ViewModels
         public CellViewModel(ICell cell)
         {
             Cell = cell;
-            FlagCommand = new DelegateCommand(FlagCell);
-            RevealCommand = new DelegateCommand(RevealCell);
-        }
-
-        private void FlagCell()
-        {
-            Cell.Game.FlagCell(Cell.Coordinates);
-        }
-
-        private void RevealCell()
-        {
-            Cell.Game.RevealCell(Cell.Coordinates);
+            FlagCommand = new DelegateCommand(Cell.Flag);
+            RevealCommand = new DelegateCommand(Cell.Reveal);
         }
 
         #region Fields
