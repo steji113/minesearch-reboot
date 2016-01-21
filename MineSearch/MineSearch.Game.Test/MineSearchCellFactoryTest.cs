@@ -17,12 +17,7 @@ namespace MineSearch.Game.Test
         public void TestCreateCellsMinePlacement()
         {
             // Create some simple game settings.
-            IGameSettings gameSettings = new GameSettings
-            {
-                Rows = 3,
-                Columns = 3,
-                MineCount = 4
-            };
+            IGameSettings gameSettings = new GameSettings(3, 3, 4);
 
             // Create the list of mine cells that will be fed to the generator.
             IList<Point> desiredCoords = new List<Point>

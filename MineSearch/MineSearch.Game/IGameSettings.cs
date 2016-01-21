@@ -8,16 +8,16 @@
         /// <summary>
         /// Number of rows.
         /// </summary>
-        int Rows { get; set; }
+        int Rows { get; }
 
         /// <summary>
         /// Number of columns.
         /// </summary>
-        int Columns { get; set; }
+        int Columns { get; }
 
         /// <summary>
         /// Number of mines.
         /// </summary>
-        int MineCount { get; set; }
+        int MineCount { get; }
     }
 }

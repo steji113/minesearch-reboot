@@ -54,6 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GameSettingsTest.cs" />
     <Compile Include="MineSearchCellFactoryTest.cs" />
     <Compile Include="MineSearchGameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

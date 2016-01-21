@@ -12,12 +12,7 @@ namespace MineSearch.Game.Test
         public void TestInitialize()
         {
             // Create some simple game settings.
-            _gameSettings = new GameSettings
-            {
-                Rows = 4,
-                Columns = 4,
-                MineCount = 4
-            };
+            _gameSettings = new GameSettings(4, 4, 4);
             // Use the default random point generator.
            _randomPointGenerator = new DefaultRandomPointGenerator();
             // Use the default cell factory.
@@ -85,12 +80,7 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestWinGameTiny()
         {
-            IGameSettings tinyGameSettings = new GameSettings
-            {
-                Rows = 1,
-                Columns = 1,
-                MineCount = 1
-            };
+            IGameSettings tinyGameSettings = new GameSettings(1, 1, 1);
             IMatrix<ICell> cells = _cellFactory.CreateCells(tinyGameSettings, _randomPointGenerator);
             IMineSearchGame tinyGame = new MineSearchGame(cells);
 
@@ -103,12 +93,7 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestWinGameSmall()
         {
-            IGameSettings smallGameSettings = new GameSettings
-            {
-                Rows = 3,
-                Columns = 3,
-                MineCount = 3
-            };
+            IGameSettings smallGameSettings = new GameSettings(3, 3, 3);
             IMatrix<ICell> cells = _cellFactory.CreateCells(smallGameSettings, _randomPointGenerator);
             IMineSearchGame smallGame = new MineSearchGame(cells);
 

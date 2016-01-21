@@ -20,7 +20,7 @@
         /// </summary>
         public int MineCount { get; set; }
 
-        public GameSettings()
+        public GameSettings(int rows, int columns, int mineCount)
         {
             
         }

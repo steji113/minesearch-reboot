@@ -11,12 +11,7 @@ namespace MineSearch.Wpf.Test
         [TestInitialize]
         public void TestInitialize()
         {
-            _gameSettings = new GameSettings
-            {
-                Rows = 4,
-                Columns = 4,
-                MineCount = 4
-            };
+            _gameSettings = new GameSettings(4, 4, 4);
             _randomGenerator = new DefaultRandomPointGenerator();
             _gameViewModel = new MineSearchGameViewModel(_gameSettings, _randomGenerator);
         }

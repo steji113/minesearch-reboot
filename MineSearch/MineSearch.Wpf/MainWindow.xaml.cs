@@ -27,12 +27,7 @@ namespace MineSearch.Wpf
             InitializeComponent();
 
             // Create some simple game settings
-            var gameSettings = new GameSettings
-            {
-                Rows = 2,
-                Columns = 2,
-                MineCount = 1
-            };
+            var gameSettings = new GameSettings(2, 2, 1);
             // Use the default random number generator
             IRandomPointGenerator rndGen = new DefaultRandomPointGenerator();
             var cellFactory = new MineSearchCellsFactory();
