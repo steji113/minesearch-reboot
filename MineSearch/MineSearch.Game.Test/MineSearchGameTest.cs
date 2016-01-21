@@ -30,6 +30,16 @@ namespace MineSearch.Game.Test
         }
 
         [TestMethod]
+        public void TestRemoveFlag()
+        {
+            var cellToFlag = _cells.First(cell => cell is SafeCell);
+            _game.FlagCell(cellToFlag.Coordinates);
+            _game.RemoveFlag(cellToFlag.Coordinates);
+            
+            Assert.IsFalse(cellToFlag.Flagged);
+        }
+
+        [TestMethod]
         public void TestFlagSafeCell()
         {
             var cellToFlag = _cells.First(cell => cell is SafeCell);
