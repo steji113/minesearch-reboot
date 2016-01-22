@@ -95,22 +95,6 @@ namespace MineSearch.Game
         }
 
         /// <summary>
-        /// Flags a cell.
-        /// </summary>
-        /// <param name="cell">Cell to flag.</param>
-        public void FlagCell(ICell cell)
-        {
-            if (!GameOver)
-            {
-                cell.Flagged = !cell.Flagged;
-                if (GameWon)
-                {
-                    GameOver = true;
-                }
-            }
-        }
-
-        /// <summary>
         /// Reveals a cell.
         /// </summary>
         /// <param name="point">Coordinates of cell to reveal.</param>
