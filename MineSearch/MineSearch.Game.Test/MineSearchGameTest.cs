@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MineSearch.Common;
 
@@ -72,6 +73,26 @@ namespace MineSearch.Game.Test
             Assert.IsTrue(cellToReveal.Revealed);
             Assert.IsFalse(_game.GameOver);
             Assert.IsFalse(_game.GameWon);
+        }
+
+        [TestMethod]
+        public void TestCascade()
+        {
+            IGameSettings gameSettings = new GameSettings(4, 4, 1);
+            var mine = new List<Point>
+            {
+                new Point(0, 0)
+            };
+            var pointGenerator = new DeterminatePointGenerator(4, 4, mine);
+            var cellFactory = new MineSearchCellsFactory(gameSettings, pointGenerator);
+            IMineSearchGame game = new MineSearchGame(cellFactory);
+
+            game.RevealCell(new Point(3, 3));
+
+            var safeCells = game.Cells.Where(cell => cell is SafeCell);
+            var revealedSafeCells = game.Cells.Where(cell => cell is SafeCell && cell.Revealed);
+
+            Assert.AreEqual(safeCells.Count(), revealedSafeCells.Count());
         }
 
         [TestMethod]

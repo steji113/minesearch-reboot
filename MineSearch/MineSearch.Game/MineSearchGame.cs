@@ -101,13 +101,27 @@ namespace MineSearch.Game
         public void RevealCell(Point point)
         {
             var cell = Cells[point.X, point.Y];
-            if (!GameOver && cell != null)
+            if (!GameOver && cell != null && !cell.Revealed)
             {
                 cell.Revealed = true;
                 if (cell is MineCell)
                 {
                     GameOver = true;
                 }
+                else
+                {
+                    Cascade(cell);
+                }
+            }
+        }
+
+        private void Cascade(ICell cell)
+        {
+            var adjacentMineCount = Cells.GetAdjacentCells(cell).Count(c => c is MineCell);
+            if (adjacentMineCount == 0)
+            {
+                var adjacent = Cells.GetAdjacentCells(cell).Select(c => c.Coordinates).ToList();
+                adjacent.ForEach(RevealCell);
             }
         }
     }
