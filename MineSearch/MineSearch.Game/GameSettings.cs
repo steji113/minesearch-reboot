@@ -1,4 +1,5 @@
 ﻿using System;
+using MineSearch.Common;
 
 namespace MineSearch.Game
 {
@@ -22,7 +23,12 @@ namespace MineSearch.Game
         /// </summary>
         public int MineCount { get; set; }
 
-        public GameSettings(int rows, int columns, int mineCount)
+        /// <summary>
+        /// Point generator.
+        /// </summary>
+        public IPointGenerator PointGenerator { get; private set; }
+
+        public GameSettings(int rows, int columns, int mineCount, IPointGenerator generator)
         {
             if (rows <= 0)
             {
@@ -48,6 +54,7 @@ namespace MineSearch.Game
             Rows = rows;
             Columns = columns;
             MineCount = mineCount;
+            PointGenerator = generator;
         }
 
         /// <summary>

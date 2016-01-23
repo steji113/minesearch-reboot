@@ -22,7 +22,7 @@ namespace MineSearch.Common.Test
             var generated = new List<Point>(points.Count);
             for (int i = 0; i < points.Count; i++)
             {
-                generated.Add(generator.Generate());
+                generated.Add(generator.Generate(2, 2));
             }
 
             Assert.IsTrue(points.SequenceEqual(generated));

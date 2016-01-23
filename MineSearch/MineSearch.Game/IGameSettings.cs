@@ -1,4 +1,6 @@
-﻿namespace MineSearch.Game
+﻿using MineSearch.Common;
+
+namespace MineSearch.Game
 {
     /// <summary>
     /// Defines the game settings.
@@ -19,5 +21,10 @@
         /// Number of mines.
         /// </summary>
         int MineCount { get; }
+
+        /// <summary>
+        /// Point generator.
+        /// </summary>
+        IPointGenerator PointGenerator { get; }
     }
 }

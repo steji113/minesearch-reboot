@@ -15,7 +15,6 @@ namespace MineSearch.Common
         /// <param name="maxColumn">Maximum column.</param>
         /// <param name="points">List of points to be generated.</param>
         public DeterminatePointGenerator(int maxRow, int maxColumn, IList<Point> points)
-            : base(maxRow, maxColumn)
         {
             _points = points;
             _currentIndex = 0;
@@ -24,8 +23,10 @@ namespace MineSearch.Common
         /// <summary>
         /// Generates a point.
         /// </summary>
+        /// <param name="maxRow">Maximum row.</param>
+        /// <param name="maxColumn">Maximum column.</param>
         /// <returns>Point.</returns>
-        public override Point Generate()
+        public override Point Generate(int maxRow, int maxColumn)
         {
             if (_currentIndex == _points.Count)
             {

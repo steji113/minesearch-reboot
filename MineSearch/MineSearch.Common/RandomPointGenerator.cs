@@ -11,9 +11,7 @@ namespace MineSearch.Common
         /// <summary>
         /// Initializes a new instance of <see cref="RandomPointGenerator"/>.
         /// </summary>
-        /// <param name="maxRow">Maximum row.</param>
-        /// <param name="maxColumn">Maximum column.</param>
-        public RandomPointGenerator(int maxRow, int maxColumn) : base(maxRow, maxColumn)
+        public RandomPointGenerator()
         {
             _generator = new Random();
         }
@@ -21,11 +19,13 @@ namespace MineSearch.Common
         /// <summary>
         /// Generates a point.
         /// </summary>
+        /// <param name="maxRow">Maximum row.</param>
+        /// <param name="maxColumn">Maximum column.</param>
         /// <returns>Point.</returns>
-        public override Point Generate()
+        public override Point Generate(int maxRow, int maxColumn)
         {
-            int x = _generator.Next(_maxColumn);
-            int y = _generator.Next(_maxRow);
+            int x = _generator.Next(maxColumn);
+            int y = _generator.Next(maxRow);
             return new Point(x, y);
         }
 

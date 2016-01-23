@@ -12,20 +12,12 @@ namespace MineSearch.Game.Test
         [TestInitialize]
         public void TestInitialize()
         {
-            // Create some simple game settings.
-            _gameSettings = new GameSettings(4, 4, 4);
             // Use the default random point generator.
-           _pointGenerator = new RandomPointGenerator(4, 4);
-            // Use the default cell factory.
-            var cellFactory = new MineSearchCellsFactory(_gameSettings, _pointGenerator);
+            var generator = new RandomPointGenerator();
+            // Create some simple game settings.
+            var gameSettings = new GameSettings(4, 4, 4, generator);
             // Create a new instance of a game.
-            _game = new MineSearchGame(cellFactory);
-        }
-
-        [TestMethod]
-        public void TestMineCount()
-        {
-            Assert.AreEqual(_gameSettings.MineCount, _game.MineCount);
+            _game = new MineSearchGame(gameSettings);
         }
 
         [TestMethod]
@@ -78,14 +70,13 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestCascade()
         {
-            IGameSettings gameSettings = new GameSettings(4, 4, 1);
             var mine = new List<Point>
             {
                 new Point(0, 0)
             };
             var pointGenerator = new DeterminatePointGenerator(4, 4, mine);
-            var cellFactory = new MineSearchCellsFactory(gameSettings, pointGenerator);
-            IMineSearchGame game = new MineSearchGame(cellFactory);
+            IGameSettings gameSettings = new GameSettings(4, 4, 1, pointGenerator);
+            IMineSearchGame game = new MineSearchGame(gameSettings);
 
             game.RevealCell(new Point(3, 3));
 
@@ -109,10 +100,9 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestWinGameTiny()
         {
-            IGameSettings tinyGameSettings = new GameSettings(1, 1, 1);
-            var pointGenerator = new RandomPointGenerator(1, 1);
-            var cellFactory = new MineSearchCellsFactory(tinyGameSettings, pointGenerator);
-            IMineSearchGame tinyGame = new MineSearchGame(cellFactory);
+            var generator = new RandomPointGenerator();
+            IGameSettings tinyGameSettings = new GameSettings(1, 1, 1, generator);
+            IMineSearchGame tinyGame = new MineSearchGame(tinyGameSettings);
 
             tinyGame.FlagCell(new Point(0, 0));
 
@@ -123,10 +113,9 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestWinGameSmall()
         {
-            IGameSettings smallGameSettings = new GameSettings(3, 3, 3);
-            var pointGenerator = new RandomPointGenerator(3, 3);
-            var cellFactory = new MineSearchCellsFactory(smallGameSettings, pointGenerator);
-            IMineSearchGame smallGame = new MineSearchGame(cellFactory);
+            var generator = new RandomPointGenerator();
+            IGameSettings smallGameSettings = new GameSettings(3, 3, 3, generator);
+            IMineSearchGame smallGame = new MineSearchGame(smallGameSettings);
 
             var mineCoordinates =
                 smallGame.Cells.Where(cell => cell is MineCell).Select(cell => cell.Coordinates);
@@ -169,8 +158,6 @@ namespace MineSearch.Game.Test
             Assert.IsFalse(_game.FlagCell(unflaggedCell.Coordinates));
         }
 
-        private IGameSettings _gameSettings;
-        private IPointGenerator _pointGenerator;
         private IMineSearchGame _game;
     }
 }

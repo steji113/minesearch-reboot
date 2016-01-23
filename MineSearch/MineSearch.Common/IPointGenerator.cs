@@ -13,7 +13,7 @@ namespace MineSearch.Common
         /// <param name="maxRow">Maximum row.</param>
         /// <param name="maxColumn">Maximum column.</param>
         /// <returns>Point.</returns>
-        Point Generate();
+        Point Generate(int maxRow, int maxColumn);
 
         /// <summary>
         /// Generates a collection of points.
@@ -22,7 +22,7 @@ namespace MineSearch.Common
         /// <param name="maxRow">Maximum row.</param>
         /// <param name="maxColumn">Maximum column.</param>
         /// <returns>Collection of points.</returns>
-        ICollection<Point> Generate(int numPoints);
+        ICollection<Point> Generate(int numPoints, int maxRow, int maxColumn);
     }
 
 }

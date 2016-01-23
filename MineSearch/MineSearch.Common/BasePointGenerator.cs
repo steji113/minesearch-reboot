@@ -4,19 +4,13 @@ namespace MineSearch.Common
 {
     public abstract class BasePointGenerator : IPointGenerator
     {
-        protected BasePointGenerator(int maxRow, int maxColumn)
-        {
-            _maxRow = maxRow;
-            _maxColumn = maxColumn;
-        }
-
         /// <summary>
         /// Generates a point.
         /// </summary>
         /// <param name="maxRow">Maximum row.</param>
         /// <param name="maxColumn">Maximum column.</param>
         /// <returns>Point.</returns>
-        public abstract Point Generate();
+        public abstract Point Generate(int maxRow, int maxColumn);
 
         /// <summary>
         /// Generates a collection of points.
@@ -25,12 +19,12 @@ namespace MineSearch.Common
         /// <param name="maxRow">Maximum row.</param>
         /// <param name="maxColumn">Maximum column.</param>
         /// <returns>Collection of points.</returns>
-        public ICollection<Point> Generate(int numPoints)
+        public ICollection<Point> Generate(int numPoints, int maxRow, int maxColumn)
         {
             var points = new List<Point>(numPoints);
             do
             {
-                var point = Generate();
+                var point = Generate(maxRow, maxColumn);
                 if (!points.Contains(point))
                 {
                     points.Add(point);
@@ -39,12 +33,5 @@ namespace MineSearch.Common
             while (points.Count != numPoints);
             return points;
         }
-
-        #region Fields
-
-        protected readonly int _maxRow;
-        protected readonly int _maxColumn;
-
-        #endregion
     }
 }

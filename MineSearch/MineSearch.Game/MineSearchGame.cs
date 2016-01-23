@@ -52,8 +52,9 @@ namespace MineSearch.Game
 
         #endregion
 
-        public MineSearchGame(IMineSearchCellsFactory cellsFactory)
+        public MineSearchGame(IGameSettings gameSettings)
         {
+            var cellsFactory = new MineSearchCellsFactory(gameSettings);
             Cells = cellsFactory.CreateCells();
         }
 

@@ -74,8 +74,7 @@ namespace MineSearch.Wpf.ViewModels
         private void NewGame(IGameSettings gameSettings)
         {
             GameSettings = gameSettings;
-            var cellFactory = new MineSearchCellsFactory(gameSettings, _generator);
-            Game = new MineSearchGame(cellFactory);
+            Game = new MineSearchGame(GameSettings);
             var cellViewModels = new Matrix<ICellViewModel>(Game.Rows, Game.Columns);
             foreach (var cell in Game.Cells)
             {

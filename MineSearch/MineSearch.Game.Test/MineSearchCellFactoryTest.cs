@@ -12,9 +12,6 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestCreateCellsMinePlacement()
         {
-            // Create some simple game settings.
-            IGameSettings gameSettings = new GameSettings(3, 3, 4);
-
             // Create the list of mine cells that will be fed to the generator.
             IList<Point> desiredCoords = new List<Point>
             {
@@ -24,7 +21,10 @@ namespace MineSearch.Game.Test
                 new Point(2, 2)
             };
             IPointGenerator generator = new DeterminatePointGenerator(2, 2, desiredCoords);
-            var cellFactory = new MineSearchCellsFactory(gameSettings, generator);
+
+            // Create some simple game settings.
+            IGameSettings gameSettings = new GameSettings(3, 3, 4, generator);
+            var cellFactory = new MineSearchCellsFactory(gameSettings);
             // Create the cells via factory method.
             IMatrix<ICell> cells = cellFactory.CreateCells();
 

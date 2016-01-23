@@ -8,11 +8,9 @@ namespace MineSearch.Game
     public class MineSearchCellsFactory : IMineSearchCellsFactory
     {
 
-        public MineSearchCellsFactory(IGameSettings gameSettings,
-            IPointGenerator pointGenerator)
+        public MineSearchCellsFactory(IGameSettings gameSettings)
         {
             _gameSettings = gameSettings;
-            _pointGenerator = pointGenerator;
         }
 
         /// <summary>
@@ -30,8 +28,10 @@ namespace MineSearch.Game
                 cells[point.X, point.Y] = new SafeCell(point);
             }
 
-            // Populate a list of random points where mines will be placed.
-            var mineCoordinates = _pointGenerator.Generate(_gameSettings.MineCount);
+            // Populate a list of points where mines will be placed.
+            IPointGenerator generator = _gameSettings.PointGenerator;
+            var mineCoordinates = generator.Generate(_gameSettings.MineCount,
+                _gameSettings.Rows, _gameSettings.Columns);
 
             // Populate the cell matrix with mines.
             foreach (var mineCoordinate in mineCoordinates)
@@ -45,7 +45,6 @@ namespace MineSearch.Game
         #region Fields
 
         private readonly IGameSettings _gameSettings;
-        private readonly IPointGenerator _pointGenerator;
 
         #endregion
     }
