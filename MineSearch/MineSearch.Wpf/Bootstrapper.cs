@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using Microsoft.Practices.Unity;
-using MineSearch.Game;
+using MineSearch.Common;
 using MineSearch.Wpf.Views.Windows;
 using Prism.Unity;
 
@@ -21,7 +21,7 @@ namespace MineSearch.Wpf
         {
             base.ConfigureContainer();
             Container.RegisterType<MainWindow>();
-            
+            Container.RegisterType<IPointGenerator, RandomPointGenerator>();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MineSearch.Wpf.Test
         {
             _generator = new RandomPointGenerator();
             _gameSettings = new GameSettings(4, 4, 4, _generator);
-            _gameViewModel = new MineSearchGameViewModel(_gameSettings, _generator);
+            _gameViewModel = new MineSearchGameViewModel(_gameSettings);
         }
 
         [TestMethod]

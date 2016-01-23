@@ -95,6 +95,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\DefaultGameSettings.cs" />
     <Compile Include="ViewModels\CellViewModel.cs" />
     <Compile Include="ViewModels\ICellViewModel.cs" />
     <Compile Include="ViewModels\IMineSearchGameViewModel.cs" />

@@ -1,5 +1,4 @@
-﻿using Microsoft.Practices.Unity;
-using MineSearch.Wpf.ViewModels;
+﻿using MineSearch.Wpf.ViewModels;
 
 namespace MineSearch.Wpf.Views.Windows
 {
@@ -10,15 +9,15 @@ namespace MineSearch.Wpf.Views.Windows
     {
         #region Properties
 
-        public MainWindowViewModel ViewModel { get; set; }
+        public MainWindowViewModel ViewModel { get; private set; }
 
         #endregion
 
-        public MainWindow(IUnityContainer container)
+        public MainWindow(MainWindowViewModel viewModel)
         {
             InitializeComponent();
 
-            ViewModel = container.Resolve<MainWindowViewModel>();
+            ViewModel = viewModel;
         }
     }
 }

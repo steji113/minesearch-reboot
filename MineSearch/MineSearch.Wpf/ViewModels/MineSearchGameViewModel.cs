@@ -58,10 +58,8 @@ namespace MineSearch.Wpf.ViewModels
 
         #endregion
 
-        public MineSearchGameViewModel(IGameSettings gameSettings,
-            IPointGenerator generator)
+        public MineSearchGameViewModel(IGameSettings gameSettings)
         {
-            _generator = generator;
             NewGameCommand = new DelegateCommand(NewGame);
             NewGame(gameSettings);
         }
@@ -88,7 +86,6 @@ namespace MineSearch.Wpf.ViewModels
 
         private IMineSearchGame _game;
         private IMatrix<ICellViewModel> _cellViewModels;
-        private readonly IPointGenerator _generator;
 
         #endregion
     }
