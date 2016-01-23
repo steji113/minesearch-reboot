@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MineSearch.Common;
+// ReSharper disable UnusedVariable
 
 namespace MineSearch.Game.Test
 {
