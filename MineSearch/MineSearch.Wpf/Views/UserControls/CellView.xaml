@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="MineSearch.Wpf.Views.UserControls.CellView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:game="clr-namespace:MineSearch.Game;assembly=MineSearch.Game"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Width="30" Height="30">
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </Grid.Resources>
+        <Button
+            Command="{Binding RevealCommand}">
+            <Button.InputBindings>
+                <MouseBinding 
+                    Gesture="RightClick"
+                    Command="{Binding FlagCommand}" />
+            </Button.InputBindings>
+            <Button.Content>
+                <ContentControl Content="{Binding Cell}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type game:SafeCell}">
+                            <ContentControl>
+                                <Grid>
+                                    <TextBlock
+                                        Text="F"
+                                        Visibility="{Binding Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <TextBlock
+                                        Text="A"
+                                        Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                </Grid>
+                            </ContentControl>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type game:MineCell}">
+                            <ContentControl>
+                                <Grid>
+                                    <TextBlock
+                                        Text="F"
+                                        Visibility="{Binding Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <TextBlock
+                                        Text="X"
+                                        Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                </Grid>
+                            </ContentControl>
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>
