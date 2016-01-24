@@ -22,13 +22,14 @@ namespace MineSearch.Wpf.Test
             var cells = _gameViewModel.Game.Cells;
             var viewModels = _gameViewModel.CellViewModels;
 
-            Assert.AreEqual(cells.Rows, viewModels.Rows);
-            Assert.AreEqual(cells.Columns, viewModels.Columns);
-
-            foreach (var cell in _gameViewModel.Game.Cells)
+            foreach (var row in viewModels)
             {
-                var viewModel = viewModels[cell.Coordinates.X, cell.Coordinates.Y];
-                Assert.AreEqual(cell, viewModel.Cell);
+                foreach (var viewModel in row)
+                {
+                    var coords = viewModel.Cell.Coordinates;
+                    var cell = cells[coords.X, coords.Y];
+                    Assert.AreEqual(cell, viewModel.Cell);
+                }
             }
         }
 

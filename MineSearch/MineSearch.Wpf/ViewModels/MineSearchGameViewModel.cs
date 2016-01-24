@@ -1,6 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using MineSearch.Common;
 using MineSearch.Common.ViewModels;
 using MineSearch.Game;
 
@@ -38,7 +38,7 @@ namespace MineSearch.Wpf.ViewModels
         /// <summary>
         /// Matrix of cell view models.
         /// </summary>
-        public IMatrix<ICellViewModel> CellViewModels
+        public List<List<ICellViewModel>> CellViewModels
         {
             get { return _cellViewModels; }
             private set
@@ -73,11 +73,15 @@ namespace MineSearch.Wpf.ViewModels
         {
             GameSettings = gameSettings;
             Game = new MineSearchGame(GameSettings);
-            var cellViewModels = new Matrix<ICellViewModel>(Game.Rows, Game.Columns);
-            foreach (var cell in Game.Cells)
+            var cellViewModels = new List<List<ICellViewModel>>(GameSettings.Rows);
+            for (int row = 0; row < GameSettings.Rows; row++)
             {
-                var viewModel = new CellViewModel(Game, cell);
-                cellViewModels[cell.Coordinates.X, cell.Coordinates.Y] = viewModel;
+                cellViewModels.Add(new List<ICellViewModel>(GameSettings.Columns));
+                for (int col = 0; col < GameSettings.Columns; col++)
+                {
+                    var cell = Game.Cells[row, col];
+                    cellViewModels[row].Add(new CellViewModel(Game, cell));
+                }
             }
             CellViewModels = cellViewModels;
         }
@@ -85,7 +89,7 @@ namespace MineSearch.Wpf.ViewModels
         #region Fields
 
         private IMineSearchGame _game;
-        private IMatrix<ICellViewModel> _cellViewModels;
+        private List<List<ICellViewModel>> _cellViewModels;
 
         #endregion
     }

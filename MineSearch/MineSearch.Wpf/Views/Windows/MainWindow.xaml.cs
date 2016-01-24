@@ -18,6 +18,7 @@ namespace MineSearch.Wpf.Views.Windows
             InitializeComponent();
 
             ViewModel = viewModel;
+            DataContext = ViewModel;
         }
     }
 }

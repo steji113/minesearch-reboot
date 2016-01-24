@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
 using MineSearch.Common;
 using MineSearch.Game;
 
@@ -24,6 +25,6 @@ namespace MineSearch.Wpf.ViewModels
         /// <summary>
         /// Matrix of cell view models.
         /// </summary>
-        IMatrix<ICellViewModel> CellViewModels { get; }
+        List<List<ICellViewModel>> CellViewModels { get; }
     }
 }
