@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
-using MineSearch.Common;
 using MineSearch.Game;
 
 namespace MineSearch.Wpf.ViewModels

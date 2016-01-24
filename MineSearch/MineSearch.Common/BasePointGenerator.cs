@@ -2,6 +2,9 @@
 
 namespace MineSearch.Common
 {
+    /// <summary>
+    /// Abstract base class for a point generator.
+    /// </summary>
     public abstract class BasePointGenerator : IPointGenerator
     {
         /// <summary>

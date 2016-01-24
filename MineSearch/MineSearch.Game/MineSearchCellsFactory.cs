@@ -8,7 +8,10 @@ namespace MineSearch.Game
     /// </summary>
     public class MineSearchCellsFactory : IMineSearchCellsFactory
     {
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MineSearchCellsFactory"/> class.
+        /// </summary>
+        /// <param name="gameSettings">Game settings.</param>
         public MineSearchCellsFactory(IGameSettings gameSettings)
         {
             _gameSettings = gameSettings;
