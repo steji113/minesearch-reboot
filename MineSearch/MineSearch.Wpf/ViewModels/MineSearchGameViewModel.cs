@@ -6,6 +6,9 @@ using MineSearch.Game;
 
 namespace MineSearch.Wpf.ViewModels
 {
+    /// <summary>
+    /// Mine search game view model.
+    /// </summary>
     public class MineSearchGameViewModel : ViewModelBase, IMineSearchGameViewModel
     {
         #region Commands
@@ -58,6 +61,10 @@ namespace MineSearch.Wpf.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MineSearchGameViewModel"/> class.
+        /// </summary>
+        /// <param name="gameSettings">Game settings to use.</param>
         public MineSearchGameViewModel(IGameSettings gameSettings)
         {
             NewGameCommand = new DelegateCommand(NewGame);

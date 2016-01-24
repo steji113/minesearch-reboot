@@ -4,6 +4,9 @@ using MineSearch.Wpf.Models;
 
 namespace MineSearch.Wpf.ViewModels
 {
+    /// <summary>
+    /// Main window view model.
+    /// </summary>
     public class MainWindowViewModel : ViewModelBase
     {
         #region Properties
@@ -15,6 +18,10 @@ namespace MineSearch.Wpf.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
+        /// </summary>
+        /// <param name="pointGenerator">Point generator to use when creating mine cells.</param>
         public MainWindowViewModel(IPointGenerator pointGenerator)
         {
             var defaultSettings = new DefaultGameSettings(pointGenerator);

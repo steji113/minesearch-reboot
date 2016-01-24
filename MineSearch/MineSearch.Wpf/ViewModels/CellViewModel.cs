@@ -5,6 +5,9 @@ using MineSearch.Game;
 
 namespace MineSearch.Wpf.ViewModels
 {
+    /// <summary>
+    /// Cell view model.
+    /// </summary>
     public class CellViewModel : ViewModelBase, ICellViewModel
     {
         #region Commands
@@ -35,6 +38,11 @@ namespace MineSearch.Wpf.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CellViewModel"/> class.
+        /// </summary>
+        /// <param name="game">Game instance.</param>
+        /// <param name="cell">Cell.</param>
         public CellViewModel(IMineSearchGame game, ICell cell)
         {
             Game = game;
