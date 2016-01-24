@@ -18,5 +18,10 @@ namespace MineSearch.Game
         /// Whether or not the cell has been revealed.
         /// </summary>
         bool Revealed { get; set; }
+
+        /// <summary>
+        /// Number of mines adjacent to this cell.
+        /// </summary>
+        int AdjacentMineCount { get; set; }
     }
 }

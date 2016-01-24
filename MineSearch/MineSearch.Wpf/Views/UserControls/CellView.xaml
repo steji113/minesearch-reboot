@@ -27,7 +27,7 @@
                                         Text="F"
                                         Visibility="{Binding Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                     <TextBlock
-                                        Text="A"
+                                        Text="{Binding AdjacentMineCount}"
                                         Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </Grid>
                             </ContentControl>

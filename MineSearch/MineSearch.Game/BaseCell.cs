@@ -43,6 +43,11 @@ namespace MineSearch.Game
             }
         }
 
+        /// <summary>
+        /// Number of mines adjacent to this cell.
+        /// </summary>
+        public int AdjacentMineCount { get; set; }
+
         #endregion
 
         protected BaseCell(Point coordinates)

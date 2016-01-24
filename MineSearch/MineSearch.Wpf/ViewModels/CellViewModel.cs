@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Linq;
+using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using MineSearch.Common.ViewModels;
 using MineSearch.Game;

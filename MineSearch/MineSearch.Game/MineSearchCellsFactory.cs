@@ -1,4 +1,5 @@
-﻿using MineSearch.Common;
+﻿using System.Linq;
+using MineSearch.Common;
 
 namespace MineSearch.Game
 {
@@ -37,6 +38,12 @@ namespace MineSearch.Game
             foreach (var mineCoordinate in mineCoordinates)
             {
                 cells[mineCoordinate.X, mineCoordinate.Y] = new MineCell(mineCoordinate);
+            }
+
+            // Calculate each cell's adjacent mine count.
+            foreach (var cell in cells)
+            {
+                cell.AdjacentMineCount = cells.GetAdjacentCells(cell).Count(c => c is MineCell);
             }
 
             return cells;
