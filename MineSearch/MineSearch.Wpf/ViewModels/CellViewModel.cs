@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using MineSearch.Common.ViewModels;
 using MineSearch.Game;
@@ -46,7 +45,14 @@ namespace MineSearch.Wpf.ViewModels
 
         private void FlagCell()
         {
-            Game.FlagCell(Cell.Coordinates);
+            if (Cell.Flagged)
+            {
+                Game.RemoveFlag(Cell.Coordinates);
+            }
+            else
+            {
+                Game.FlagCell(Cell.Coordinates);
+            }
         }
 
         private void RevealCell()
