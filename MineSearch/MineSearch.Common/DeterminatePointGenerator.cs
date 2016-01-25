@@ -11,10 +11,8 @@ namespace MineSearch.Common
         /// <summary>
         /// Initializes a new instance of <see cref="DeterminatePointGenerator"/>.
         /// </summary>
-        /// <param name="maxRow">Maximum row.</param>
-        /// <param name="maxColumn">Maximum column.</param>
         /// <param name="points">List of points to be generated.</param>
-        public DeterminatePointGenerator(int maxRow, int maxColumn, IList<Point> points)
+        public DeterminatePointGenerator(IList<Point> points)
         {
             _points = points;
             _currentIndex = 0;

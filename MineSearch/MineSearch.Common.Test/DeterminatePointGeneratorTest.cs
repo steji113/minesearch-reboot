@@ -18,7 +18,7 @@ namespace MineSearch.Common.Test
                 new Point(1, 1)
             };
 
-            var generator = new DeterminatePointGenerator(2, 2, points);
+            var generator = new DeterminatePointGenerator(points);
             var generated = new List<Point>(points.Count);
             for (int i = 0; i < points.Count; i++)
             {

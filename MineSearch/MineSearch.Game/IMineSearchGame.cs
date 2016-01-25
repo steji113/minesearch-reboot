@@ -61,5 +61,7 @@ namespace MineSearch.Game
         /// </summary>
         /// <param name="point">Coordinates of cell to reveal.</param>
         void RevealCell(Point point);
+
+        void CascadeCell(Point point);
     }
 }

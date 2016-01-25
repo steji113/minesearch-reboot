@@ -45,8 +45,8 @@ namespace MineSearch.Common
             {
                 throw new ArgumentOutOfRangeException("columns", "columns must be greater than 0");
             }
-            int x = index / columns;
-            int y = index % columns;
+            int x = index % columns;
+            int y = index / columns;
             return new Point(x, y);
         }
 

@@ -68,25 +68,6 @@ namespace MineSearch.Game.Test
         }
 
         [TestMethod]
-        public void TestCascade()
-        {
-            var mine = new List<Point>
-            {
-                new Point(0, 0)
-            };
-            var pointGenerator = new DeterminatePointGenerator(4, 4, mine);
-            IGameSettings gameSettings = new GameSettings(4, 4, 1, pointGenerator);
-            IMineSearchGame game = new MineSearchGame(gameSettings);
-
-            game.RevealCell(new Point(3, 3));
-
-            var safeCells = game.Cells.Where(cell => cell is SafeCell);
-            var revealedSafeCells = game.Cells.Where(cell => cell is SafeCell && cell.Revealed);
-
-            Assert.AreEqual(safeCells.Count(), revealedSafeCells.Count());
-        }
-
-        [TestMethod]
         public void TestRevealMineCell()
         {
             var cellToReveal = _game.Cells.First(cell => cell is MineCell);

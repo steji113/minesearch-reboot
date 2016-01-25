@@ -20,7 +20,7 @@ namespace MineSearch.Game.Test
                 new Point(2, 1),
                 new Point(2, 2)
             };
-            IPointGenerator generator = new DeterminatePointGenerator(2, 2, desiredCoords);
+            IPointGenerator generator = new DeterminatePointGenerator(desiredCoords);
 
             // Create some simple game settings.
             IGameSettings gameSettings = new GameSettings(3, 3, 4, generator);

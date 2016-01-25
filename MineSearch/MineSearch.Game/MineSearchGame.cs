@@ -109,20 +109,26 @@ namespace MineSearch.Game
                 {
                     GameOver = true;
                 }
-                else
-                {
-                    Cascade(cell);
-                }
             }
         }
 
-        private void Cascade(ICell cell)
+        public void CascadeCell(Point point)
         {
-            var adjacentMineCount = Cells.GetAdjacentCells(cell).Count(c => c is MineCell);
-            if (adjacentMineCount == 0)
+            var cell = Cells[point.X, point.Y];
+            if (cell != null)
             {
-                var adjacent = Cells.GetAdjacentCells(cell).Select(c => c.Coordinates).ToList();
-                adjacent.ForEach(RevealCell);
+                var adjacentMineCount = Cells.GetAdjacentCells(cell).Count(c => c is MineCell);
+                if (adjacentMineCount == 0)
+                {
+                    var adjacent =
+                        Cells.GetAdjacentCells(cell).Where(c => !c.Revealed).Select(
+                            c => c.Coordinates);
+                    foreach (var adjacentPoint in adjacent)
+                    {
+                        RevealCell(adjacentPoint);
+                        CascadeCell(adjacentPoint);
+                    }
+                }
             }
         }
     }

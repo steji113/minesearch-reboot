@@ -66,6 +66,7 @@ namespace MineSearch.Wpf.ViewModels
         private void RevealCell()
         {
             Game.RevealCell(Cell.Coordinates);
+            Game.CascadeCell(Cell.Coordinates);
         }
 
         #region Fields

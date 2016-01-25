@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using MineSearch.Common.ViewModels;
@@ -86,11 +87,34 @@ namespace MineSearch.Wpf.ViewModels
                 cellViewModels.Add(new List<ICellViewModel>(GameSettings.Columns));
                 for (int col = 0; col < GameSettings.Columns; col++)
                 {
-                    var cell = Game.Cells[row, col];
+                    var cell = Game.Cells[col, row];
                     cellViewModels[row].Add(new CellViewModel(Game, cell));
                 }
             }
             CellViewModels = cellViewModels;
+
+#if DEBUG
+            for (int row = 0; row < GameSettings.Rows; row++)
+            {
+                for (int col = 0; col < GameSettings.Columns; col++)
+                {
+                    var cell = Game.Cells[col, row];
+                    Debug.Write("[");
+                    string content;
+                    if (cell is MineCell)
+                    {
+                        content = "X";
+                    }
+                    else
+                    {
+                        content = cell.AdjacentMineCount + "";
+                    }
+                    Debug.Write(content);
+                    Debug.Write("]");
+                }
+                Debug.WriteLine("");
+            }
+#endif
         }
 
         #region Fields

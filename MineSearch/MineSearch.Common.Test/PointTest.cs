@@ -14,24 +14,37 @@ namespace MineSearch.Common.Test
         }
 
         [TestMethod]
-        public void TestFromIndex()
+        public void TestFromIndexSquare()
         {
-            int columns = 3;
-
+            int rows = 10;
+            int columns = 10;
             int index = 0;
-            var point = Point.FromIndex(index, columns);
-            Assert.AreEqual(point.X, 0);
-            Assert.AreEqual(point.Y, 0);
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < columns; x++)
+                {
+                    var expectedPoint = new Point(x, y);
+                    var actualPoint = Point.FromIndex(index++, columns);
+                    Assert.AreEqual(expectedPoint, actualPoint);
+                }
+            }
+        }
 
-            index = 4;
-            point = Point.FromIndex(index, columns);
-            Assert.AreEqual(point.X, 1);
-            Assert.AreEqual(point.Y, 1);
-
-            index = 8;
-            point = Point.FromIndex(index, columns);
-            Assert.AreEqual(point.X, 2);
-            Assert.AreEqual(point.Y, 2);
+        [TestMethod]
+        public void TestFromIndexRectangle()
+        {
+            int rows = 5;
+            int columns = 10;
+            int index = 0;
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < columns; x++)
+                {
+                    var expectedPoint = new Point(x, y);
+                    var actualPoint = Point.FromIndex(index++, columns);
+                    Assert.AreEqual(expectedPoint, actualPoint);
+                }
+            }
         }
     }
 }

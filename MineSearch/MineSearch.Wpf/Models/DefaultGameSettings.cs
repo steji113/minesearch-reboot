@@ -7,9 +7,9 @@ namespace MineSearch.Wpf.Models
     {
         #region Constants
 
-        private const int DefaultRows = 5;
-        private const int DefaultColumns = 5;
-        private const int DefaultMineCount = 12;
+        private const int DefaultRows = 9;
+        private const int DefaultColumns = 9;
+        private const int DefaultMineCount = 15;
 
         #endregion
 
