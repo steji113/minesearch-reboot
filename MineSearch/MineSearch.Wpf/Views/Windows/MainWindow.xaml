@@ -4,6 +4,18 @@
         xmlns:userControls="clr-namespace:MineSearch.Wpf.Views.UserControls"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <userControls:MineSearchGameView DataContext="{Binding GameViewModel}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Button 
+            Command="{Binding GameViewModel.NewGameCommand}"
+            Width="100"
+            Height="30">
+            New Game
+        </Button>
+        <userControls:MineSearchGameView 
+            Grid.Row="1"
+            DataContext="{Binding GameViewModel}" />
     </Grid>
 </Window>
