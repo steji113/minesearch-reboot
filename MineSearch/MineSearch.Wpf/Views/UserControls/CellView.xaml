@@ -4,11 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:game="clr-namespace:MineSearch.Game;assembly=MineSearch.Game"
+             xmlns:converters="clr-namespace:MineSearch.Wpf.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Width="30" Height="30">
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+            <converters:AdjacentMineCountToStringConverter x:Key="AdjacentMineCountToStringConverter" />
         </Grid.Resources>
         <Button
             Command="{Binding RevealCommand}">
@@ -17,36 +20,52 @@
                     Gesture="RightClick"
                     Command="{Binding FlagCommand}" />
             </Button.InputBindings>
-            <Button.Content>
-                <ContentControl Content="{Binding Cell}">
-                    <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type game:SafeCell}">
-                            <ContentControl>
-                                <Grid>
-                                    <TextBlock
-                                        Text="F"
-                                        Visibility="{Binding Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    <TextBlock
-                                        Text="{Binding AdjacentMineCount}"
-                                        Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                </Grid>
-                            </ContentControl>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type game:MineCell}">
-                            <ContentControl>
-                                <Grid>
-                                    <TextBlock
-                                        Text="F"
-                                        Visibility="{Binding Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    <TextBlock
-                                        Text="X"
-                                        Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                </Grid>
-                            </ContentControl>
-                        </DataTemplate>
-                    </ContentControl.Resources>
-                </ContentControl>
-            </Button.Content>
+            <Button.Template>
+                <ControlTemplate>
+                    <Grid>
+                        <Border 
+                            Visibility="{Binding Cell.Revealed, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                            BorderBrush="{StaticResource CellCoveredBorder}" BorderThickness="2">
+                            <Grid Background="LightGray" />
+                        </Border>
+                        <Border 
+                            Visibility="{Binding Cell.Revealed, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            BorderBrush="{StaticResource CellRevealedBorder}" BorderThickness="1">
+                            <Grid
+                                Background="LightGray">
+                                <ContentControl Content="{Binding Cell}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <ContentControl.Resources>
+                                        <DataTemplate DataType="{x:Type game:SafeCell}">
+                                            <ContentControl>
+                                                <Grid>
+                                                    <TextBlock
+                                                        Text="F"
+                                                        Visibility="{Binding Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                    <TextBlock
+                                                        Text="{Binding AdjacentMineCount, Converter={StaticResource AdjacentMineCountToStringConverter}}"
+                                                        Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                </Grid>
+                                            </ContentControl>
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type game:MineCell}">
+                                            <ContentControl>
+                                                <Grid>
+                                                    <TextBlock
+                                                        Text="F"
+                                                        Visibility="{Binding Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                    <TextBlock
+                                                        Text="X"
+                                                        Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                </Grid>
+                                            </ContentControl>
+                                        </DataTemplate>
+                                    </ContentControl.Resources>
+                                </ContentControl>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
     </Grid>
 </UserControl>

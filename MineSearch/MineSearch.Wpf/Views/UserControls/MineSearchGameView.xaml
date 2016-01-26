@@ -9,7 +9,7 @@
     <Grid>
         <Grid.Resources>
             <DataTemplate x:Key="CellTemplate">
-                <userControls:CellView />
+                <userControls:CellView Margin="0" />
             </DataTemplate>
             <DataTemplate x:Key="RowDataTemplate">
                 <ItemsControl 
@@ -23,9 +23,11 @@
                 </ItemsControl>
             </DataTemplate>
         </Grid.Resources>
-        <ItemsControl
-            HorizontalAlignment="Center"
-            ItemsSource="{Binding CellViewModels}"
-            ItemTemplate="{DynamicResource RowDataTemplate}" />
+        <Border BorderBrush="Gray" BorderThickness="1">
+            <ItemsControl
+                HorizontalAlignment="Center"
+                ItemsSource="{Binding CellViewModels}"
+                ItemTemplate="{DynamicResource RowDataTemplate}" />
+        </Border>
     </Grid>
 </UserControl>
