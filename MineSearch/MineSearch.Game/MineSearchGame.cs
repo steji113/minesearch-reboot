@@ -36,7 +36,21 @@ namespace MineSearch.Game
         /// <summary>
         /// Whether or not the game is over.
         /// </summary>
-        public bool GameOver { get; private set; }
+        public bool GameOver
+        {
+            get { return _gameOver; }
+            set
+            {
+                if (!_gameOver && value)
+                {
+                    _gameOver = true;
+                    if (!GameWon)
+                    {
+                        LoseGame();
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Whether or not the game has been won.
@@ -89,7 +103,7 @@ namespace MineSearch.Game
         public void RemoveFlag(Point point)
         {
             var cell = Cells[point.X, point.Y];
-            if (!GameOver && cell != null)
+            if (cell != null)
             {
                 cell.Flagged = false;
             }
@@ -102,7 +116,7 @@ namespace MineSearch.Game
         public void RevealCell(Point point)
         {
             var cell = Cells[point.X, point.Y];
-            if (!GameOver && cell != null && !cell.Revealed)
+            if (cell != null && !cell.Revealed)
             {
                 cell.Revealed = true;
                 if (cell is MineCell)
@@ -112,6 +126,10 @@ namespace MineSearch.Game
             }
         }
 
+        /// <summary>
+        /// Performs a cascading reveal.
+        /// </summary>
+        /// <param name="point">Coordinates of cell to reveal.</param>
         public void CascadeCell(Point point)
         {
             var cell = Cells[point.X, point.Y];
@@ -131,5 +149,19 @@ namespace MineSearch.Game
                 }
             }
         }
+
+        private void LoseGame()
+        {
+            foreach (var cell in Cells.Where(cell => cell is MineCell))
+            {
+                RevealCell(cell.Coordinates);
+            }
+        }
+
+        #region Fields
+
+        private bool _gameOver;
+
+        #endregion
     }
 }

@@ -53,20 +53,29 @@ namespace MineSearch.Wpf.ViewModels
 
         private void FlagCell()
         {
-            if (Cell.Flagged)
+            if (!Game.GameOver)
             {
-                Game.RemoveFlag(Cell.Coordinates);
-            }
-            else
-            {
-                Game.FlagCell(Cell.Coordinates);
+                if (Cell.Flagged)
+                {
+                    Game.RemoveFlag(Cell.Coordinates);
+                }
+                else
+                {
+                    Game.FlagCell(Cell.Coordinates);
+                } 
             }
         }
 
         private void RevealCell()
         {
-            Game.RevealCell(Cell.Coordinates);
-            Game.CascadeCell(Cell.Coordinates);
+            if (!Game.GameOver)
+            {
+                Game.RevealCell(Cell.Coordinates);
+                if (Cell is SafeCell)
+                {
+                    Game.CascadeCell(Cell.Coordinates);
+                }
+            }
         }
 
         #region Fields
