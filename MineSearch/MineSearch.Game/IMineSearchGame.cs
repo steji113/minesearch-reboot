@@ -24,9 +24,14 @@ namespace MineSearch.Game
         int Rows { get; }
 
         /// <summary>
-        /// Number of mine cels in the grid.
+        /// Number of mine cells in the grid.
         /// </summary>
         int MineCount { get; }
+
+        /// <summary>
+        /// Number of flags remaining.
+        /// </summary>
+        int RemainingFlagCount { get; }
 
         /// <summary>
         /// Collection of cells that have been flagged.

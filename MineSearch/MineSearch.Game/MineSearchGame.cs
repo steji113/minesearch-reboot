@@ -4,7 +4,7 @@ using MineSearch.Common;
 
 namespace MineSearch.Game
 {
-    public class MineSearchGame : IMineSearchGame
+    public class MineSearchGame : ModelBase, IMineSearchGame
     {
         #region Properties
 
@@ -27,6 +27,22 @@ namespace MineSearch.Game
         /// Number of mine cels in the grid.
         /// </summary>
         public int MineCount { get { return Cells.Count(cell => cell is MineCell); } }
+
+        /// <summary>
+        /// Number of flags remaining.
+        /// </summary>
+        public int RemainingFlagCount
+        {
+            get { return _remainingFlagCount; }
+            private set
+            {
+                if (value != _remainingFlagCount)
+                {
+                    _remainingFlagCount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Collection of cells that have been flagged.
@@ -70,6 +86,7 @@ namespace MineSearch.Game
         {
             var cellsFactory = new MineSearchCellsFactory(gameSettings);
             Cells = cellsFactory.CreateCells();
+            RemainingFlagCount = gameSettings.MineCount;
         }
 
         /// <summary>
@@ -84,13 +101,14 @@ namespace MineSearch.Game
             {
                 return false;
             }
-            if (!cell.Flagged && FlaggedCells.Count() < MineCount)
+            if (!cell.Flagged && RemainingFlagCount > 0)
             {
                 cell.Flagged = true;
                 if (GameWon)
                 {
                     GameOver = true;
                 }
+                RemainingFlagCount--;
                 return true;
             }
             return false;
@@ -103,8 +121,9 @@ namespace MineSearch.Game
         public void RemoveFlag(Point point)
         {
             var cell = Cells[point.X, point.Y];
-            if (cell != null)
+            if (cell != null && cell.Flagged)
             {
+                RemainingFlagCount++;
                 cell.Flagged = false;
             }
         }
@@ -161,6 +180,7 @@ namespace MineSearch.Game
         #region Fields
 
         private bool _gameOver;
+        private int _remainingFlagCount;
 
         #endregion
     }
