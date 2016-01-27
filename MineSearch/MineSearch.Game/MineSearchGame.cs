@@ -158,7 +158,7 @@ namespace MineSearch.Game
                 if (adjacentMineCount == 0)
                 {
                     var adjacent =
-                        Cells.GetAdjacentCells(cell).Where(c => !c.Revealed).Select(
+                        Cells.GetAdjacentCells(cell).Where(c => !c.Revealed && !c.Flagged).Select(
                             c => c.Coordinates);
                     foreach (var adjacentPoint in adjacent)
                     {

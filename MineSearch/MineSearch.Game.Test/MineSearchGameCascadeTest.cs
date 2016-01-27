@@ -53,5 +53,32 @@ namespace MineSearch.Game.Test
 
             Assert.AreEqual(10, revealedSafeCells.Count());
         }
+
+        [TestMethod]
+        public void TestCascadeFlaggedCells()
+        {
+            int rows = 5;
+            int cols = 5;
+
+            var mines = new List<Point>
+            {
+                new Point(cols - 1, rows - 1)
+            };
+            IPointGenerator generator = new DeterminatePointGenerator(mines);
+            IGameSettings settings = new GameSettings(rows, cols, mines.Count, generator);
+            IMineSearchGame game = new MineSearchGame(settings);
+
+            var flaggedPoint = new Point(1, 0);
+            game.FlagCell(flaggedPoint);
+
+            var revealedPoint = new Point(0, 0);
+            game.RevealCell(revealedPoint);
+            game.CascadeCell(revealedPoint);
+
+            var revealedCells =
+                game.Cells.Where(cell => cell.Revealed).Select(cell => cell.Coordinates).ToList();
+
+            Assert.IsFalse(revealedCells.Contains(flaggedPoint));
+        }
     }
 }
