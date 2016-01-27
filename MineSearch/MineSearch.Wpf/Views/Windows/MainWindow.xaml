@@ -8,12 +8,25 @@
             <RowDefinition Height="50" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Button 
-            Command="{Binding GameViewModel.NewGameCommand}"
-            Width="100"
-            Height="30">
-            New Game
-        </Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBox
+                Height="30"
+                Width="50"
+                Text="{Binding GameViewModel.Game.RemainingFlagCount}"
+                IsReadOnly="True" />
+            <Button
+                Grid.Column="1"
+                Command="{Binding GameViewModel.NewGameCommand}"
+                Width="100"
+                Height="30">
+                New Game
+            </Button>
+        </Grid>
         <userControls:MineSearchGameView 
             Grid.Row="1"
             DataContext="{Binding GameViewModel}" />
