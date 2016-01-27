@@ -22,11 +22,18 @@
             </Button.InputBindings>
             <Button.Template>
                 <ControlTemplate>
-                    <Grid>
+                    <Grid Cursor="Hand">
                         <Border 
                             Visibility="{Binding Cell.Revealed, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
                             BorderBrush="{StaticResource CellCoveredBorder}" BorderThickness="2">
-                            <Grid Background="LightGray" />
+                            <Grid
+                                Background="LightGray">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="F"
+                                    Visibility="{Binding Cell.Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </Grid>
                         </Border>
                         <Border 
                             Visibility="{Binding Cell.Revealed, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -39,9 +46,6 @@
                                             <ContentControl>
                                                 <Grid>
                                                     <TextBlock
-                                                        Text="F"
-                                                        Visibility="{Binding Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                                    <TextBlock
                                                         Text="{Binding AdjacentMineCount, Converter={StaticResource AdjacentMineCountToStringConverter}}"
                                                         Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                                 </Grid>
@@ -50,9 +54,6 @@
                                         <DataTemplate DataType="{x:Type game:MineCell}">
                                             <ContentControl>
                                                 <Grid>
-                                                    <TextBlock
-                                                        Text="F"
-                                                        Visibility="{Binding Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                                     <TextBlock
                                                         Text="X"
                                                         Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
