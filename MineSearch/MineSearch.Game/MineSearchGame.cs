@@ -101,7 +101,7 @@ namespace MineSearch.Game
             {
                 return false;
             }
-            if (!cell.Flagged && RemainingFlagCount > 0)
+            if (!cell.Revealed && !cell.Flagged && RemainingFlagCount > 0)
             {
                 cell.Flagged = true;
                 if (GameWon)
@@ -135,7 +135,7 @@ namespace MineSearch.Game
         public void RevealCell(Point point)
         {
             var cell = Cells[point.X, point.Y];
-            if (cell != null && !cell.Revealed)
+            if (cell != null && !cell.Revealed && !cell.Flagged)
             {
                 cell.Revealed = true;
                 if (cell is MineCell)

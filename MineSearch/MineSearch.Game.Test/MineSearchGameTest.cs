@@ -169,6 +169,39 @@ namespace MineSearch.Game.Test
             Assert.IsFalse(_game.FlagCell(unflaggedCell.Coordinates));
         }
 
+        [TestMethod]
+        public void TestFlagRevealedCell()
+        {
+            var cell = _game.Cells.First(c => c is SafeCell);
+            _game.RevealCell(cell.Coordinates);
+
+            _game.FlagCell(cell.Coordinates);
+
+            Assert.IsFalse(cell.Flagged);
+        }
+
+        [TestMethod]
+        public void TestRevealFlaggedSafeCell()
+        {
+            var cell = _game.Cells.First(c => c is SafeCell);
+            _game.FlagCell(cell.Coordinates);
+
+            _game.RevealCell(cell.Coordinates);
+
+            Assert.IsFalse(cell.Revealed);
+        }
+
+        [TestMethod]
+        public void TestRevealFlaggedMineCell()
+        {
+            var cell = _game.Cells.First(c => c is MineCell);
+            _game.FlagCell(cell.Coordinates);
+
+            _game.RevealCell(cell.Coordinates);
+
+            Assert.IsFalse(cell.Revealed);
+        }
+
         private IMineSearchGame _game;
     }
 }
