@@ -17,6 +17,16 @@ namespace MineSearch.Wpf.ViewModels
         ICommand NewGameCommand { get; }
 
         /// <summary>
+        /// Command to start the current game.
+        /// </summary>
+        ICommand StartGameCommand { get; }
+
+        /// <summary>
+        /// Command to end the current game.
+        /// </summary>
+        ICommand EndGameCommand { get; }
+
+        /// <summary>
         /// Game instance.
         /// </summary>
         IMineSearchGame Game { get; }
@@ -25,5 +35,15 @@ namespace MineSearch.Wpf.ViewModels
         /// Matrix of cell view models.
         /// </summary>
         List<List<ICellViewModel>> CellViewModels { get; }
+
+        /// <summary>
+        /// Whether or not the game is active.
+        /// </summary>
+        bool GameActive { get; }
+
+        /// <summary>
+        /// Current game duration in seconds.
+        /// </summary>
+        int GameDurationSeconds { get; }
     }
 }

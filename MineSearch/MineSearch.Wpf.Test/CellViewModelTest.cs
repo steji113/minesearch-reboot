@@ -13,15 +13,16 @@ namespace MineSearch.Wpf.Test
         [TestMethod]
         public void TestFlagCommand()
         {
-            // Mock a game and cell
+            var mockGameViewModel = new Mock<IMineSearchGameViewModel>();
             var mockGame = new Mock<IMineSearchGame>();
             var mockCell = new Mock<ICell>();
 
-            // Setup the game's flag cell method
             mockGame.Setup(g => g.FlagCell(It.IsAny<Point>()));
+            mockGameViewModel.SetupGet(vm => vm.Game).Returns(mockGame.Object);
+            mockGameViewModel.SetupGet(vm => vm.GameActive).Returns(true);
 
             // Create the view model and execute the flag command
-            var cellViewModel = new CellViewModel(mockGame.Object, mockCell.Object);
+            var cellViewModel = new CellViewModel(mockGameViewModel.Object, mockCell.Object);
             cellViewModel.FlagCommand.Execute(null);
 
             mockGame.Verify(g => g.FlagCell(It.IsAny<Point>()), Times.Once());
@@ -30,15 +31,16 @@ namespace MineSearch.Wpf.Test
         [TestMethod]
         public void TestRevealCommand()
         {
-            // Mock a game and cell
+            var mockGameViewModel = new Mock<IMineSearchGameViewModel>();
             var mockGame = new Mock<IMineSearchGame>();
             var mockCell = new Mock<ICell>();
 
-            // Setup the game's reveal cell method
             mockGame.Setup(g => g.RevealCell(It.IsAny<Point>()));
+            mockGameViewModel.SetupGet(v => v.Game).Returns(mockGame.Object);
+            mockGameViewModel.SetupGet(vm => vm.GameActive).Returns(true);
 
             // Create the view model and execute the flag command
-            var cellViewModel = new CellViewModel(mockGame.Object, mockCell.Object);
+            var cellViewModel = new CellViewModel(mockGameViewModel.Object, mockCell.Object);
             cellViewModel.RevealCommand.Execute(null);
 
             mockGame.Verify(g => g.RevealCell(It.IsAny<Point>()), Times.Once());

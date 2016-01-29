@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Microsoft.Practices.Prism.Commands;
 using MineSearch.Common.ViewModels;
 using MineSearch.Game;
@@ -12,12 +14,28 @@ namespace MineSearch.Wpf.ViewModels
     /// </summary>
     public class MineSearchGameViewModel : ViewModelBase, IMineSearchGameViewModel
     {
+        #region Constants
+
+        private const int GameTimerIntervalSeconds = 1;
+
+        #endregion
+
         #region Commands
 
         /// <summary>
         /// New game command.
         /// </summary>
         public ICommand NewGameCommand { get; private set; }
+
+        /// <summary>
+        /// Command to start the current game.
+        /// </summary>
+        public ICommand StartGameCommand { get; private set; }
+
+        /// <summary>
+        /// Command to end the current game.
+        /// </summary>
+        public ICommand EndGameCommand { get; private set; }
 
         #endregion
 
@@ -56,6 +74,27 @@ namespace MineSearch.Wpf.ViewModels
         }
 
         /// <summary>
+        /// Whether or not the game is active.
+        /// </summary>
+        public bool GameActive { get; private set; }
+
+        /// <summary>
+        /// Current game duration in seconds.
+        /// </summary>
+        public int GameDurationSeconds
+        {
+            get { return _gameDurationSeconds; }
+            set
+            {
+                if (value != _gameDurationSeconds)
+                {
+                    _gameDurationSeconds = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
         /// Current game settings.
         /// </summary>
         public IGameSettings GameSettings { get; private set; }
@@ -69,6 +108,15 @@ namespace MineSearch.Wpf.ViewModels
         public MineSearchGameViewModel(IGameSettings gameSettings)
         {
             NewGameCommand = new DelegateCommand(NewGame);
+            StartGameCommand = new DelegateCommand(StartGame);
+            EndGameCommand = new DelegateCommand(EndGame);
+
+            _gameTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(GameTimerIntervalSeconds)
+            };
+            _gameTimer.Tick += GameTimerOnTick;
+
             NewGame(gameSettings);
         }
 
@@ -81,6 +129,26 @@ namespace MineSearch.Wpf.ViewModels
         {
             GameSettings = gameSettings;
             Game = new MineSearchGame(GameSettings);
+            CreateCellViewModels();
+            GameDurationSeconds = 0;
+
+            PrintBoard();
+        }
+
+        private void StartGame()
+        {
+            _gameTimer.Start();
+            GameActive = true;
+        }
+
+        private void EndGame()
+        {
+            _gameTimer.Stop();
+            GameActive = false;
+        }
+
+        private void CreateCellViewModels()
+        {
             var cellViewModels = new List<List<ICellViewModel>>(GameSettings.Rows);
             for (int row = 0; row < GameSettings.Rows; row++)
             {
@@ -88,12 +156,19 @@ namespace MineSearch.Wpf.ViewModels
                 for (int col = 0; col < GameSettings.Columns; col++)
                 {
                     var cell = Game.Cells[col, row];
-                    cellViewModels[row].Add(new CellViewModel(Game, cell));
+                    cellViewModels[row].Add(new CellViewModel(this, cell));
                 }
             }
             CellViewModels = cellViewModels;
+        }
 
-#if DEBUG
+        private void GameTimerOnTick(object sender, EventArgs e)
+        {
+            GameDurationSeconds++;
+        }
+
+        private void PrintBoard()
+        {
             for (int row = 0; row < GameSettings.Rows; row++)
             {
                 for (int col = 0; col < GameSettings.Columns; col++)
@@ -114,13 +189,14 @@ namespace MineSearch.Wpf.ViewModels
                 }
                 Debug.WriteLine("");
             }
-#endif
         }
 
         #region Fields
 
         private IMineSearchGame _game;
         private List<List<ICellViewModel>> _cellViewModels;
+        private readonly DispatcherTimer _gameTimer;
+        private int _gameDurationSeconds;
 
         #endregion
     }

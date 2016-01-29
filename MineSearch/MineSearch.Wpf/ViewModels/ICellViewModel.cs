@@ -19,6 +19,11 @@ namespace MineSearch.Wpf.ViewModels
         ICommand RevealCommand { get; }
 
         /// <summary>
+        /// Game view model this cell belongs to.
+        /// </summary>
+        IMineSearchGameViewModel GameViewModel { get; }
+
+        /// <summary>
         /// Game instance the cell belongs to.
         /// </summary>
         IMineSearchGame Game { get; }

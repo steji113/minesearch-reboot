@@ -27,6 +27,11 @@ namespace MineSearch.Wpf.ViewModels
         #region Propertes
 
         /// <summary>
+        /// Game view model this cell belongs to.
+        /// </summary>
+        public IMineSearchGameViewModel GameViewModel { get; private set; }
+
+        /// <summary>
         /// Game instance the cell belongs to.
         /// </summary>
         public IMineSearchGame Game { get; private set; }
@@ -41,11 +46,12 @@ namespace MineSearch.Wpf.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="CellViewModel"/> class.
         /// </summary>
-        /// <param name="game">Game instance.</param>
+        /// <param name="gameViewModel">Game view model.</param>
         /// <param name="cell">Cell.</param>
-        public CellViewModel(IMineSearchGame game, ICell cell)
+        public CellViewModel(IMineSearchGameViewModel gameViewModel, ICell cell)
         {
-            Game = game;
+            GameViewModel = gameViewModel;
+            Game = gameViewModel.Game;
             Cell = cell;
             FlagCommand = new DelegateCommand(FlagCell);
             RevealCommand = new DelegateCommand(RevealCell);
@@ -53,6 +59,11 @@ namespace MineSearch.Wpf.ViewModels
 
         private void FlagCell()
         {
+            if (!GameViewModel.GameActive)
+            {
+                GameViewModel.StartGameCommand.Execute(null);
+            }
+
             if (!Game.GameOver)
             {
                 if (Cell.Flagged)
@@ -68,12 +79,21 @@ namespace MineSearch.Wpf.ViewModels
 
         private void RevealCell()
         {
+            if (!GameViewModel.GameActive)
+            {
+                GameViewModel.StartGameCommand.Execute(null);
+            }
+
             if (!Game.GameOver)
             {
                 Game.RevealCell(Cell.Coordinates);
                 if (Cell is SafeCell)
                 {
                     Game.CascadeCell(Cell.Coordinates);
+                }
+                if (Game.GameOver)
+                {
+                    GameViewModel.EndGameCommand.Execute(null);
                 }
             }
         }
