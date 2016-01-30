@@ -5,27 +5,18 @@
         xmlns:converters="clr-namespace:MineSearch.Wpf.Converters"
         Title="MainWindow" Height="350" Width="525">
     <Border 
+        Background="LightGray"
         BorderBrush="Gray"
         BorderThickness="2">
-        <Grid Background="LightGray">
+        <Grid Margin="10">
             <Grid.Resources>
                 <converters:GameStatusToIconConverter x:Key="GameStatusToIconConverter" />
             </Grid.Resources>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="10" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
             </Grid.RowDefinitions>
             <Border
-                Grid.Column="1"
-                Grid.Row="1"
                 BorderBrush="{StaticResource BorderStyle}"
                 BorderThickness="2">
                 <Grid>
@@ -58,8 +49,8 @@
                 </Grid>
             </Border>
             <Border
-                Grid.Column="1"
-                Grid.Row="3"
+                Grid.Row="1"
+                Margin="0,10,0,0"
                 BorderBrush="{StaticResource BorderStyle}"
                 BorderThickness="2">
                 <userControls:MineSearchGameView
