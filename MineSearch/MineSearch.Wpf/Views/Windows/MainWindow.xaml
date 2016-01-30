@@ -4,45 +4,67 @@
         xmlns:userControls="clr-namespace:MineSearch.Wpf.Views.UserControls"
         xmlns:converters="clr-namespace:MineSearch.Wpf.Converters"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Grid.Resources>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <converters:GameStatusToIconConverter x:Key="GameStatusToIconConverter" />
-        </Grid.Resources>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid>
+    <Border 
+        BorderBrush="Gray"
+        BorderThickness="2">
+        <Grid Background="LightGray">
+            <Grid.Resources>
+                <converters:GameStatusToIconConverter x:Key="GameStatusToIconConverter" />
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
             </Grid.ColumnDefinitions>
-            <TextBox
-                Height="30"
-                Width="50"
-                Text="{Binding GameViewModel.Game.RemainingFlagCount}"
-                IsReadOnly="True" />
-            <Button
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+            <Border
                 Grid.Column="1"
-                Command="{Binding GameViewModel.NewGameCommand}"
-                Width="30"
-                Height="30">
-                <Grid Width="20" Height="20">
-                    <ContentControl
-                        Template="{Binding GameViewModel.GameStatus, Converter={StaticResource GameStatusToIconConverter}}" />
+                Grid.Row="1"
+                BorderBrush="{StaticResource BorderStyle}"
+                BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Style="{StaticResource DisplayTextBoxStyle}"
+                        HorizontalAlignment="Left"
+                        Margin="10,0,0,0"
+                        Text="{Binding GameViewModel.Game.RemainingFlagCount}" />
+                    <Button
+                        Grid.Column="1"
+                        Command="{Binding GameViewModel.NewGameCommand}"
+                        Width="30"
+                        Height="30">
+                        <Grid Width="20" Height="20">
+                            <ContentControl
+                                Template="{Binding GameViewModel.GameStatus, Converter={StaticResource GameStatusToIconConverter}}" />
+                        </Grid>
+                    </Button>
+                    <TextBox
+                        Grid.Column="2"
+                        Style="{StaticResource DisplayTextBoxStyle}"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,10,0"
+                        Text="{Binding GameViewModel.GameDurationSeconds}" />
                 </Grid>
-            </Button>
-            <TextBox
-                Grid.Column="2"
-                Height="30"
-                Width="50"
-                Text="{Binding GameViewModel.GameDurationSeconds}"
-                IsReadOnly="True" />
+            </Border>
+            <Border
+                Grid.Column="1"
+                Grid.Row="3"
+                BorderBrush="{StaticResource BorderStyle}"
+                BorderThickness="2">
+                <userControls:MineSearchGameView
+                    DataContext="{Binding GameViewModel}" />
+            </Border>
         </Grid>
-        <userControls:MineSearchGameView 
-            Grid.Row="1"
-            DataContext="{Binding GameViewModel}" />
-    </Grid>
+    </Border>
 </Window>
