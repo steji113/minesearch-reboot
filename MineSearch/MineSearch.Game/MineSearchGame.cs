@@ -138,8 +138,10 @@ namespace MineSearch.Game
             if (cell != null && !cell.Revealed && !cell.Flagged)
             {
                 cell.Revealed = true;
-                if (cell is MineCell)
+                if (!GameOver && cell is MineCell)
                 {
+                    var mineCell = cell as MineCell;
+                    mineCell.ExplosionSource = true;
                     GameOver = true;
                 }
             }

@@ -202,6 +202,24 @@ namespace MineSearch.Game.Test
             Assert.IsFalse(cell.Revealed);
         }
 
+        [TestMethod]
+        public void TestExplosionSource()
+        {
+            var mineCells = _game.Cells.Where(c => c is MineCell).ToList();
+            var explosionSourceCell = mineCells.First() as MineCell;
+            Assert.IsNotNull(explosionSourceCell);
+
+            _game.RevealCell(explosionSourceCell.Coordinates);
+
+            Assert.IsTrue(explosionSourceCell.ExplosionSource);
+
+            foreach (var cell in mineCells.Skip(1))
+            {
+                var mineCell = (MineCell) cell;
+                Assert.IsFalse(mineCell.ExplosionSource);
+            }
+        }
+
         private IMineSearchGame _game;
     }
 }
