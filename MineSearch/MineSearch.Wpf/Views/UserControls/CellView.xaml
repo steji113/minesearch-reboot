@@ -12,6 +12,7 @@
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
             <converters:AdjacentMineCountToStringConverter x:Key="AdjacentMineCountToStringConverter" />
+            <converters:AdjacentMineCountToColorConverter x:Key="AdjacentMineCountToColorConverter" />
         </Grid.Resources>
         <Button
             Command="{Binding RevealCommand}">
@@ -48,6 +49,10 @@
                                             <ContentControl>
                                                 <Grid>
                                                     <TextBlock
+                                                        FontSize="16"
+                                                        FontWeight="ExtraBold"
+                                                        FontFamily="Courier New"
+                                                        Foreground="{Binding AdjacentMineCount, Converter={StaticResource AdjacentMineCountToColorConverter}}"
                                                         Text="{Binding AdjacentMineCount, Converter={StaticResource AdjacentMineCountToStringConverter}}"
                                                         Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                                 </Grid>
