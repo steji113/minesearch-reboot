@@ -50,6 +50,12 @@
                     Width="40"
                     Height="40"
                     Fill="Black" />
+                <Ellipse
+                    Canvas.Left="20"
+                    Canvas.Top="20"
+                    Width="8"
+                    Height="8"
+                    Fill="White" />
                 <!-- Left Spoke -->
                 <Rectangle
                     Canvas.Left="1"
@@ -57,6 +63,12 @@
                     Width="12"
                     Height="6"
                     Fill="Black" />
+                <!-- Top Left Spoke -->
+                <Line
+                    X1="8" Y1="8"
+                    X2="16" Y2="16"
+                    StrokeThickness="3"
+                    Stroke="Black" />
                 <!-- Top Spoke -->
                 <Rectangle
                     Canvas.Left="29"
@@ -64,6 +76,12 @@
                     Width="6"
                     Height="12"
                     Fill="Black" />
+                <!-- Top Right Spoke -->
+                <Line
+                    X1="56" Y1="8"
+                    X2="48" Y2="16"
+                    StrokeThickness="3"
+                    Stroke="Black" />
                 <!-- Right Spoke -->
                 <Rectangle
                     Canvas.Left="51"
@@ -71,6 +89,12 @@
                     Width="12"
                     Height="6"
                     Fill="Black" />
+                <!-- Bottom Right Spoke -->
+                <Line
+                    X1="56" Y1="56"
+                    X2="48" Y2="48"
+                    StrokeThickness="3"
+                    Stroke="Black" />
                 <!-- Bottom Spoke -->
                 <Rectangle
                     Canvas.Left="29"
@@ -78,6 +102,12 @@
                     Width="6"
                     Height="12"
                     Fill="Black" />
+                <!-- Bottom Left Spoke -->
+                <Line
+                    X1="8" Y1="56"
+                    X2="16" Y2="48"
+                    StrokeThickness="3"
+                    Stroke="Black" />
             </Canvas>
         </Viewbox>
     </ControlTemplate>

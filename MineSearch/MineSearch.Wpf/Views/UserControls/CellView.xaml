@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:MineSearch.Wpf.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Width="30" Height="30">
+    <Grid Width="26" Height="26">
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
@@ -30,8 +30,8 @@
                                 Background="LightGray">
                                 <ContentControl 
                                     Template="{StaticResource FlagIcon}"
-                                    Width="18"
-                                    Height="18"
+                                    Width="16"
+                                    Height="16"
                                     Visibility="{Binding Cell.Flagged, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center" />
@@ -56,8 +56,8 @@
                                         <DataTemplate DataType="{x:Type game:MineCell}">
                                             <ContentControl 
                                                 Template="{StaticResource MineIcon}"
-                                                Width="18"
-                                                Height="18"
+                                                Width="16"
+                                                Height="16"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
                                             </ContentControl>
