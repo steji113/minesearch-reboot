@@ -28,12 +28,13 @@
                             BorderBrush="{StaticResource CellCoveredBorder}" BorderThickness="2">
                             <Grid
                                 Background="LightGray">
-                                <TextBlock
+                                <ContentControl 
+                                    Template="{StaticResource FlagIcon}"
+                                    Width="18"
+                                    Height="18"
+                                    Visibility="{Binding Cell.Flagged, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Text="F"
-                                    Foreground="Blue"
-                                    Visibility="{Binding Cell.Flagged, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    VerticalAlignment="Center" />
                             </Grid>
                         </Border>
                         <Border 

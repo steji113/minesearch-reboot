@@ -79,7 +79,35 @@
                     Height="12"
                     Fill="Black" />
             </Canvas>
-        </Viewbox>    
+        </Viewbox>
     </ControlTemplate>
-    
+
+    <ControlTemplate x:Key="FlagIcon">
+        <Viewbox Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+            <Canvas Width="30" Height="30">
+                <Rectangle
+                    Canvas.Left="2"
+                    Canvas.Bottom="0"
+                    Width="26"
+                    Height="4"
+                    Fill="Black" />
+                <Rectangle
+                    Canvas.Left="6"
+                    Canvas.Bottom="4"
+                    Width="18"
+                    Height="4"
+                    Fill="Black" />
+                <Rectangle
+                    Canvas.Left="14"
+                    Canvas.Bottom="8"
+                    Width="2"
+                    Height="8"
+                    Fill="Black" />
+                <Polygon
+                    Points="2,8 16,0 16,15"
+                    Fill="Red" />
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+
 </ResourceDictionary>
