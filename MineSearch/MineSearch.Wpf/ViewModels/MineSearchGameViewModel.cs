@@ -186,7 +186,14 @@ namespace MineSearch.Wpf.ViewModels
                 for (int col = 0; col < GameSettings.Columns; col++)
                 {
                     var cell = Game.Cells[col, row];
-                    cellViewModels[row].Add(new CellViewModel(this, cell));
+                    if (cell is SafeCell)
+                    {
+                        cellViewModels[row].Add(new SafeCellViewModel(this, cell));
+                    }
+                    else
+                    {
+                        cellViewModels[row].Add(new MineCellViewModel(this, cell));
+                    }
                 }
             }
             CellViewModels = cellViewModels;

@@ -9,12 +9,12 @@
     <Grid>
         <Grid.Resources>
             <DataTemplate x:Key="CellTemplate">
-                <userControls:CellView Margin="0" />
+                <userControls:CellView />
             </DataTemplate>
             <DataTemplate x:Key="RowDataTemplate">
                 <ItemsControl 
                     ItemsSource="{Binding}"
-                    ItemTemplate="{DynamicResource CellTemplate}">
+                    ItemTemplate="{StaticResource CellTemplate}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal" />
@@ -27,7 +27,7 @@
             <ItemsControl
                 HorizontalAlignment="Center"
                 ItemsSource="{Binding CellViewModels}"
-                ItemTemplate="{DynamicResource RowDataTemplate}" />
+                ItemTemplate="{StaticResource RowDataTemplate}" />
         </Border>
     </Grid>
 </UserControl>
