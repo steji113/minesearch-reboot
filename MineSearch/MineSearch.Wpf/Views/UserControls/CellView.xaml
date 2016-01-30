@@ -13,6 +13,7 @@
             <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
             <converters:AdjacentMineCountToStringConverter x:Key="AdjacentMineCountToStringConverter" />
             <converters:AdjacentMineCountToColorConverter x:Key="AdjacentMineCountToColorConverter" />
+            <converters:ExplosionSourceToColorConverter x:Key="ExplosionSourceToColorConverter" />
         </Grid.Resources>
         <Button
             Command="{Binding RevealCommand}">
@@ -41,14 +42,16 @@
                         <Border 
                             Visibility="{Binding Cell.Revealed, Converter={StaticResource BooleanToVisibilityConverter}}"
                             BorderBrush="{StaticResource CellRevealedBorder}" BorderThickness="1">
-                            <Grid
-                                Background="LightGray">
-                                <ContentControl Content="{Binding Cell}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <ContentControl Content="{Binding Cell}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                     <ContentControl.Resources>
                                         <DataTemplate DataType="{x:Type game:SafeCell}">
                                             <ContentControl>
-                                                <Grid>
+                                                <Grid
+                                                    Background="LightGray">
                                                     <TextBlock
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
                                                         FontSize="16"
                                                         FontWeight="ExtraBold"
                                                         FontFamily="Courier New"
@@ -59,13 +62,15 @@
                                             </ContentControl>
                                         </DataTemplate>
                                         <DataTemplate DataType="{x:Type game:MineCell}">
-                                            <ContentControl 
-                                                Template="{StaticResource MineIcon}"
-                                                Width="16"
-                                                Height="16"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center">
-                                            </ContentControl>
+                                            <Grid Background="{Binding ExplosionSource, Converter={StaticResource ExplosionSourceToColorConverter}}">
+                                                <ContentControl 
+                                                    Template="{StaticResource MineIcon}"
+                                                    Width="16"
+                                                    Height="16"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center">
+                                                </ContentControl>
+                                            </Grid>
                                         </DataTemplate>
                                     </ContentControl.Resources>
                                 </ContentControl>
