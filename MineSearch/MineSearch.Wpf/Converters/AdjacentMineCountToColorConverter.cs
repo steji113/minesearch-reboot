@@ -23,7 +23,19 @@ namespace MineSearch.Wpf.Converters
                     color = Colors.Red;
                     break;
                 case 4:
-                    color = Colors.DarkBlue;
+                    color = Colors.Purple;
+                    break;
+                case 5:
+                    color = Colors.Maroon;
+                    break;
+                case 6:
+                    color = Colors.Teal;
+                    break;
+                case 7:
+                    color = Colors.Black;
+                    break;
+                case 8:
+                    color = Colors.DimGray;
                     break;
                 default:
                     color = Colors.Black;
