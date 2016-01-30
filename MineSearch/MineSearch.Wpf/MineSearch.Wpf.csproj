@@ -97,8 +97,10 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Converters\AdjacentMineCountToColorConverter.cs" />
     <Compile Include="Converters\AdjacentMineCountToStringConverter.cs" />
+    <Compile Include="Converters\GameStatusToIconConverter.cs" />
     <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Models\DefaultGameSettings.cs" />
+    <Compile Include="Models\GameStatus.cs" />
     <Compile Include="ViewModels\CellViewModel.cs" />
     <Compile Include="ViewModels\ICellViewModel.cs" />
     <Compile Include="ViewModels\IMineSearchGameViewModel.cs" />

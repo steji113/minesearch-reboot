@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using Microsoft.Practices.Prism.Commands;
 using MineSearch.Common.ViewModels;
 using MineSearch.Game;
+using MineSearch.Wpf.Models;
 
 namespace MineSearch.Wpf.ViewModels
 {
@@ -76,7 +77,18 @@ namespace MineSearch.Wpf.ViewModels
         /// <summary>
         /// Whether or not the game is active.
         /// </summary>
-        public bool GameActive { get; private set; }
+        public bool GameActive
+        {
+            get { return _gameActive; }
+            set
+            {
+                if (value != _gameActive)
+                {
+                    _gameActive = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Current game duration in seconds.
@@ -89,6 +101,22 @@ namespace MineSearch.Wpf.ViewModels
                 if (value != _gameDurationSeconds)
                 {
                     _gameDurationSeconds = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Game status.
+        /// </summary>
+        public GameStatus GameStatus
+        {
+            get { return _gameStatus; }
+            set
+            {
+                if (value != _gameStatus)
+                {
+                    _gameStatus = value;
                     OnPropertyChanged();
                 }
             }
@@ -131,6 +159,7 @@ namespace MineSearch.Wpf.ViewModels
             Game = new MineSearchGame(GameSettings);
             CreateCellViewModels();
             GameDurationSeconds = 0;
+            GameStatus = GameStatus.Neutral;
 
             PrintBoard();
         }
@@ -145,6 +174,7 @@ namespace MineSearch.Wpf.ViewModels
         {
             _gameTimer.Stop();
             GameActive = false;
+            GameStatus = Game.GameWon ? GameStatus.Won : GameStatus.Lost;
         }
 
         private void CreateCellViewModels()
@@ -197,6 +227,8 @@ namespace MineSearch.Wpf.ViewModels
         private List<List<ICellViewModel>> _cellViewModels;
         private readonly DispatcherTimer _gameTimer;
         private int _gameDurationSeconds;
+        private bool _gameActive;
+        private GameStatus _gameStatus;
 
         #endregion
     }

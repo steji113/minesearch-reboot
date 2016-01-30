@@ -59,42 +59,57 @@ namespace MineSearch.Wpf.ViewModels
 
         private void FlagCell()
         {
+            // Do nothing if the game has already ended.
+            if (Game.GameOver)
+            {
+                return;
+            }
+            // Start the game if it hasn't yet been started.
             if (!GameViewModel.GameActive)
             {
                 GameViewModel.StartGameCommand.Execute(null);
             }
-
-            if (!Game.GameOver)
+            // Has this cell already been flagged?
+            if (Cell.Flagged)
             {
-                if (Cell.Flagged)
+                // Yes. Let's remove the flag.
+                Game.RemoveFlag(Cell.Coordinates);
+            }
+            else
+            {
+                // No.  Let's flag the cell.
+                Game.FlagCell(Cell.Coordinates);
+                // End the game if this flag resulted in game over.
+                if (Game.GameOver)
                 {
-                    Game.RemoveFlag(Cell.Coordinates);
+                    GameViewModel.EndGameCommand.Execute(null);
                 }
-                else
-                {
-                    Game.FlagCell(Cell.Coordinates);
-                } 
             }
         }
 
         private void RevealCell()
         {
+            // Do nothing if the game has already ended.
+            if (Game.GameOver)
+            {
+                return;
+            }
+            // Start the game if it hasn't yet been started.
             if (!GameViewModel.GameActive)
             {
                 GameViewModel.StartGameCommand.Execute(null);
             }
-
-            if (!Game.GameOver)
+            // Reveal the cell.
+            Game.RevealCell(Cell.Coordinates);
+            // Cascde if a safe cell was revealed.
+            if (Cell is SafeCell)
             {
-                Game.RevealCell(Cell.Coordinates);
-                if (Cell is SafeCell)
-                {
-                    Game.CascadeCell(Cell.Coordinates);
-                }
-                if (Game.GameOver)
-                {
-                    GameViewModel.EndGameCommand.Execute(null);
-                }
+                Game.CascadeCell(Cell.Coordinates);
+            }
+            // End the game if this reveal resulted in game over.
+            if (Game.GameOver)
+            {
+                GameViewModel.EndGameCommand.Execute(null);
             }
         }
 

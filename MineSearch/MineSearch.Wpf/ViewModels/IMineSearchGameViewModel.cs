@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using MineSearch.Game;
+using MineSearch.Wpf.Models;
 
 namespace MineSearch.Wpf.ViewModels
 {
@@ -45,5 +46,10 @@ namespace MineSearch.Wpf.ViewModels
         /// Current game duration in seconds.
         /// </summary>
         int GameDurationSeconds { get; }
+
+        /// <summary>
+        /// Game status.
+        /// </summary>
+        GameStatus GameStatus { get; }
     }
 }

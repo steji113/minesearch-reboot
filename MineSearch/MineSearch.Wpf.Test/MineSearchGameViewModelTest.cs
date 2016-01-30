@@ -1,6 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MineSearch.Common;
 using MineSearch.Game;
+using MineSearch.Wpf.Models;
 using MineSearch.Wpf.ViewModels;
 
 namespace MineSearch.Wpf.Test
@@ -40,6 +42,45 @@ namespace MineSearch.Wpf.Test
             _gameViewModel.NewGameCommand.Execute(null);
             var newGame = _gameViewModel.Game;
             Assert.AreNotEqual(oldGame, newGame);
+        }
+
+        [TestMethod]
+        public void TestGameStatusNeutral()
+        {
+            // Game should start neutral.
+            Assert.AreEqual(GameStatus.Neutral, _gameViewModel.GameStatus);
+        }
+
+        [TestMethod]
+        public void TestGameStatusWon()
+        {
+            // Flag each mine cell to win the game.
+            foreach (var row in _gameViewModel.CellViewModels)
+            {
+                foreach (var cellViewModel in row.Where(vm => vm.Cell is MineCell))
+                {
+                    cellViewModel.FlagCommand.Execute(null);
+                }
+            }
+            // Game should be won.
+            Assert.AreEqual(GameStatus.Won, _gameViewModel.GameStatus);
+        }
+
+        [TestMethod]
+        public void TestGameStatusLost()
+        {
+            // Reveal a mine cell to lose the game.
+            foreach (var row in _gameViewModel.CellViewModels)
+            {
+                var mineCell = row.FirstOrDefault(vm => vm.Cell is MineCell);
+                if (mineCell != null)
+                {
+                    mineCell.RevealCommand.Execute(null);
+                    break;
+                }
+            }
+            // Game should be lost.
+            Assert.AreEqual(GameStatus.Lost, _gameViewModel.GameStatus);
         }
 
         private IGameSettings _gameSettings;
