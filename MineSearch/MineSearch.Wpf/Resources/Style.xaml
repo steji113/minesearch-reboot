@@ -188,4 +188,47 @@
         </Viewbox>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="SadFaceIcon">
+        <Viewbox Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+            <Grid>
+                <ContentControl Template="{StaticResource FaceIcon}" />
+                <Canvas Width="30" Height="30">
+                    <Line
+                        X1="6" Y1="8"
+                        X2="12" Y2="14"
+                        Stroke="Black"
+                        StrokeThickness="1" />
+                    <Line
+                        X1="6" Y1="14"
+                        X2="12" Y2="8"
+                        Stroke="Black"
+                        StrokeThickness="1" />
+                    <Line
+                        X1="24" Y1="8"
+                        X2="18" Y2="14"
+                        Stroke="Black"
+                        StrokeThickness="1" />
+                    <Line
+                        X1="24" Y1="14"
+                        X2="18" Y2="8"
+                        Stroke="Black"
+                        StrokeThickness="1" />
+                    <Path
+                        Stroke="Black"
+                        StrokeThickness="1">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathGeometry.Figures>
+                                    <PathFigure StartPoint="8,22">
+                                        <QuadraticBezierSegment Point1="15, 14" Point2="22, 22" />
+                                    </PathFigure>
+                                </PathGeometry.Figures>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Grid>
+        </Viewbox>
+    </ControlTemplate>
+
 </ResourceDictionary>
