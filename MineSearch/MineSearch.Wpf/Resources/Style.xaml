@@ -191,7 +191,10 @@
     <ControlTemplate x:Key="SadFaceIcon">
         <Viewbox Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
             <Grid>
-                <ContentControl Template="{StaticResource FaceIcon}" />
+                <ContentControl
+                    Width="30"
+                    Height="30"
+                    Template="{StaticResource FaceIcon}" />
                 <Canvas Width="30" Height="30">
                     <Line
                         X1="6" Y1="8"
@@ -221,6 +224,56 @@
                                 <PathGeometry.Figures>
                                     <PathFigure StartPoint="8,22">
                                         <QuadraticBezierSegment Point1="15, 14" Point2="22, 22" />
+                                    </PathFigure>
+                                </PathGeometry.Figures>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Grid>
+        </Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SunglassesFaceIcon">
+        <Viewbox Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+            <Grid>
+                <ContentControl Template="{StaticResource FaceIcon}" />
+                <Canvas Width="30" Height="30">
+                    <Ellipse
+                        Canvas.Left="5"
+                        Canvas.Top="8"
+                        Width="9"
+                        Height="9"
+                        Fill="Black" />
+                    <Ellipse
+                        Canvas.Right="5"
+                        Canvas.Top="8"
+                        Width="9"
+                        Height="9"
+                        Fill="Black" />
+                    <Line
+                        X1="6" Y1="12"
+                        X2="0" Y2="16"
+                        Stroke="Black"
+                        StrokeThickness="1" />
+                    <Line
+                        X1="8" Y1="13"
+                        X2="22" Y2="13"
+                        Stroke="Black"
+                        StrokeThickness="1" />
+                    <Line
+                        X1="24" Y1="12"
+                        X2="30" Y2="16"
+                        Stroke="Black"
+                        StrokeThickness="1" />
+                    <Path
+                        Stroke="Black"
+                        StrokeThickness="1">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathGeometry.Figures>
+                                    <PathFigure StartPoint="8,20">
+                                        <QuadraticBezierSegment Point1="15, 28" Point2="22, 20" />
                                     </PathFigure>
                                 </PathGeometry.Figures>
                             </PathGeometry>
