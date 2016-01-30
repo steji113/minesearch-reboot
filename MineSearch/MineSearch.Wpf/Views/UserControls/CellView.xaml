@@ -53,12 +53,12 @@
                                             </ContentControl>
                                         </DataTemplate>
                                         <DataTemplate DataType="{x:Type game:MineCell}">
-                                            <ContentControl>
-                                                <Grid>
-                                                    <TextBlock
-                                                        Text="X"
-                                                        Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                                </Grid>
+                                            <ContentControl 
+                                                Template="{StaticResource MineIcon}"
+                                                Width="18"
+                                                Height="18"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
                                             </ContentControl>
                                         </DataTemplate>
                                     </ContentControl.Resources>
