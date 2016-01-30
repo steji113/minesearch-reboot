@@ -140,4 +140,52 @@
         </Viewbox>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="FaceIcon">
+        <Viewbox Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+            <Canvas Width="30" Height="30">
+                <Ellipse
+                    Width="30"
+                    Height="30"
+                    Stroke="Black"
+                    StrokeThickness="1"
+                    Fill="Yellow" />
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SmileyFaceIcon">
+        <Viewbox Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+            <Grid>
+                <ContentControl Template="{StaticResource FaceIcon}" />
+                <Canvas Width="30" Height="30">
+                    <Ellipse
+                        Canvas.Left="8"
+                        Canvas.Top="10"
+                        Width="3"
+                        Height="3"
+                        Fill="Black" />
+                    <Ellipse
+                        Canvas.Right="8"
+                        Canvas.Top="10"
+                        Width="3"
+                        Height="3"
+                        Fill="Black" />
+                    <Path
+                        Stroke="Black"
+                        StrokeThickness="1">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathGeometry.Figures>
+                                    <PathFigure StartPoint="8,20">
+                                        <QuadraticBezierSegment Point1="15, 28" Point2="22, 20" />
+                                    </PathFigure>
+                                </PathGeometry.Figures>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Grid>
+        </Viewbox>
+    </ControlTemplate>
+
 </ResourceDictionary>
