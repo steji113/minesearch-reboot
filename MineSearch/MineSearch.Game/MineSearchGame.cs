@@ -64,6 +64,7 @@ namespace MineSearch.Game
                     {
                         LoseGame();
                     }
+                    OnPropertyChanged();
                 }
             }
         }

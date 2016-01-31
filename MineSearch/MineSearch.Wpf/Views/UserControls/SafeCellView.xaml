@@ -19,13 +19,29 @@
             BorderBrush="{StaticResource CellCoveredBorder}"
             BorderThickness="2"
             Background="LightGray">
-            <ContentControl 
-                Template="{StaticResource FlagIcon}"
-                Width="16"
-                Height="16"
-                Visibility="{Binding Cell.Flagged, Converter={StaticResource BooleanToVisibilityConverter}}"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
+            <Grid 
+                Visibility="{Binding Cell.Flagged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ContentControl 
+                    Template="{StaticResource FlagIcon}"
+                    Width="16"
+                    Height="16"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding GameViewModel.Game.GameOver, Converter={StaticResource InverseBooleanToVisibilityConverter}}" />
+                <Grid
+                    Visibility="{Binding GameViewModel.Game.GameOver, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <ContentControl 
+                        Template="{StaticResource MineIcon}"
+                        Width="16"
+                        Height="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+                    <Canvas Width="16" Height="16">
+                        <Line X1="0" Y1="0" X2="16" Y2="16" Stroke="Red" StrokeThickness="2" />
+                        <Line X1="0" Y1="16" X2="16" Y2="0" Stroke="Red" StrokeThickness="2" />
+                    </Canvas>
+                </Grid>
+            </Grid>
         </Border>
         <!-- Revealed state -->
         <Border 
