@@ -4,30 +4,60 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:userControls="clr-namespace:MineSearch.Wpf.Views.UserControls"
+             xmlns:converters="clr-namespace:MineSearch.Wpf.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Grid.Resources>
-            <DataTemplate x:Key="CellTemplate">
-                <userControls:CellView />
-            </DataTemplate>
-            <DataTemplate x:Key="RowDataTemplate">
-                <ItemsControl 
-                    ItemsSource="{Binding}"
-                    ItemTemplate="{StaticResource CellTemplate}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </DataTemplate>
-        </Grid.Resources>
-        <Border BorderBrush="Gray" BorderThickness="1">
-            <ItemsControl
-                HorizontalAlignment="Center"
-                ItemsSource="{Binding CellViewModels}"
-                ItemTemplate="{StaticResource RowDataTemplate}" />
-        </Border>
-    </Grid>
+    <Border 
+        Background="LightGray"
+        BorderBrush="Gray"
+        BorderThickness="2">
+        <Grid Margin="10">
+            <Grid.Resources>
+                <converters:GameStatusToIconConverter x:Key="GameStatusToIconConverter" />
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border
+                BorderBrush="{StaticResource BorderStyle}"
+                BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Style="{StaticResource DisplayTextBoxStyle}"
+                        HorizontalAlignment="Left"
+                        Margin="10,0,0,0"
+                        Text="{Binding Game.RemainingFlagCount}" />
+                    <Button
+                        Grid.Column="1"
+                        Command="{Binding NewGameCommand}"
+                        Width="30"
+                        Height="30">
+                        <Grid Width="20" Height="20">
+                            <ContentControl
+                                Template="{Binding GameStatus, Converter={StaticResource GameStatusToIconConverter}}" />
+                        </Grid>
+                    </Button>
+                    <TextBox
+                        Grid.Column="2"
+                        Style="{StaticResource DisplayTextBoxStyle}"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,10,0"
+                        Text="{Binding GameDurationSeconds}" />
+                </Grid>
+            </Border>
+            <Border
+                Grid.Row="1"
+                Margin="0,10,0,0"
+                BorderBrush="{StaticResource BorderStyle}"
+                BorderThickness="2">
+                <userControls:CellMatrixView DataContext="{Binding CellViewModels}" />
+            </Border>
+        </Grid>
+    </Border>
 </UserControl>

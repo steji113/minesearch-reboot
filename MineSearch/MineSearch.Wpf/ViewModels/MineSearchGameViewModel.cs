@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Microsoft.Practices.Prism.Commands;
@@ -156,6 +155,8 @@ namespace MineSearch.Wpf.ViewModels
 
         private void NewGame(IGameSettings gameSettings)
         {
+            _gameTimer.Stop();
+
             GameSettings = gameSettings;
             Game = new MineSearchGame(GameSettings);
             CreateCellViewModels();
@@ -176,8 +177,6 @@ namespace MineSearch.Wpf.ViewModels
             _gameTimer.Stop();
             GameActive = false;
             GameStatus = Game.GameWon ? GameStatus.Won : GameStatus.Lost;
-
-            
         }
 
         private void CreateCellViewModels()

@@ -112,6 +112,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\CellMatrixView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\CellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +141,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\SafeCellViewModel.cs" />
+    <Compile Include="Views\UserControls\CellMatrixView.xaml.cs">
+      <DependentUpon>CellMatrixView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\CellView.xaml.cs">
       <DependentUpon>CellView.xaml</DependentUpon>
     </Compile>
