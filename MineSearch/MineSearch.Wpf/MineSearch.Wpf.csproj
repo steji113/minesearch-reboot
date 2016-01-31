@@ -141,6 +141,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\SafeCellViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\UserControls\CellMatrixView.xaml.cs">
       <DependentUpon>CellMatrixView.xaml</DependentUpon>
     </Compile>
