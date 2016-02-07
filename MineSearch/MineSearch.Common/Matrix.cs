@@ -82,7 +82,7 @@ namespace MineSearch.Common
         /// Determines the index of a specific item in the <see cref="IMatrix{T}"/>.
         /// </summary>
         /// <param name="item">The object to locate in the <see cref="IMatrix{T}"/>.</param>
-        /// <returns></returns>
+        /// <returns>The index of the element if found, otherwise -1.</returns>
         public int IndexOf(T item)
         {
             int index = 0;
@@ -94,21 +94,25 @@ namespace MineSearch.Common
                 }
                 index++;
             }
-            return 0;
+
+            return -1;
         }
 
         /// <summary>
         /// Adds an item to the next empty cell.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">Item to add.</param>
         public void AddItem(T item)
         {
             var firstEmptyCell = this.First(cell => cell == null);
             int index = IndexOf(firstEmptyCell);
-            if (index >= Columns * Rows)
+
+            // Validate the index.
+            if (index < 0)
             {
                 throw new InvalidOperationException();
             }
+
             var p = Point.FromIndex(index, Columns);
             this[p.X, p.Y] = item;
         }
