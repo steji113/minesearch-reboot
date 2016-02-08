@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineSearch.Game", "MineSearch.Game\MineSearch.Game.csproj", "{3A207C75-C3FD-46F9-AF28-C2A2A3CC32E4}"
 EndProject
@@ -14,6 +14,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineSearch.Wpf", "MineSearch.Wpf\MineSearch.Wpf.csproj", "{BA7F94C7-34DE-41A5-A2EC-4D039FD60078}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineSearch.Wpf.Test", "MineSearch.Wpf.Test\MineSearch.Wpf.Test.csproj", "{FE0E4EC0-9FEA-4CC0-A6C5-4D06F4B61F4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6BED73CB-CE51-4E86-842D-3844F68DD39A}"
+	ProjectSection(SolutionItems) = preProject
+		CodeCoverage.runsettings = CodeCoverage.runsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

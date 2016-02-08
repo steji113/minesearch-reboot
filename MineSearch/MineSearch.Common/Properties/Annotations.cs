@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 #pragma warning disable 1591
 // ReSharper disable UnusedMember.Global
@@ -71,6 +72,7 @@ namespace MineSearch.Common.Annotations
   [AttributeUsage(
     AttributeTargets.Constructor | AttributeTargets.Method |
     AttributeTargets.Property | AttributeTargets.Delegate)]
+  [ExcludeFromCodeCoverage]
   public sealed class StringFormatMethodAttribute : Attribute
   {
     /// <param name="formatParameterName">
@@ -89,6 +91,7 @@ namespace MineSearch.Common.Annotations
   /// Specify fields of which type should be used as values for this parameter.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field)]
+  [ExcludeFromCodeCoverage]
   public sealed class ValueProviderAttribute : Attribute
   {
     public ValueProviderAttribute(string name)
@@ -150,6 +153,7 @@ namespace MineSearch.Common.Annotations
   /// </list>
   /// </example>
   [AttributeUsage(AttributeTargets.Method)]
+  [ExcludeFromCodeCoverage]
   public sealed class NotifyPropertyChangedInvocatorAttribute : Attribute
   {
     public NotifyPropertyChangedInvocatorAttribute() { }
@@ -205,6 +209,7 @@ namespace MineSearch.Common.Annotations
   /// </code></item>
   /// </list></examples>
   [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class ContractAnnotationAttribute : Attribute
   {
     public ContractAnnotationAttribute([NotNull] string contract)
@@ -230,6 +235,7 @@ namespace MineSearch.Common.Annotations
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.All)]
+  [ExcludeFromCodeCoverage]
   public sealed class LocalizationRequiredAttribute : Attribute
   {
     public LocalizationRequiredAttribute() : this(true) { }
@@ -275,6 +281,7 @@ namespace MineSearch.Common.Annotations
   /// </code></example>
   [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
   [BaseTypeRequired(typeof(Attribute))]
+  [ExcludeFromCodeCoverage]
   public sealed class BaseTypeRequiredAttribute : Attribute
   {
     public BaseTypeRequiredAttribute([NotNull] Type baseType)
@@ -290,6 +297,7 @@ namespace MineSearch.Common.Annotations
   /// so this symbol will not be marked as unused (as well as by other usage inspections).
   /// </summary>
   [AttributeUsage(AttributeTargets.All)]
+  [ExcludeFromCodeCoverage]
   public sealed class UsedImplicitlyAttribute : Attribute
   {
     public UsedImplicitlyAttribute()
@@ -316,6 +324,7 @@ namespace MineSearch.Common.Annotations
   /// as unused (as well as by other usage inspections)
   /// </summary>
   [AttributeUsage(AttributeTargets.Class | AttributeTargets.GenericParameter)]
+  [ExcludeFromCodeCoverage]
   public sealed class MeansImplicitUseAttribute : Attribute
   {
     public MeansImplicitUseAttribute()
@@ -374,6 +383,7 @@ namespace MineSearch.Common.Annotations
   /// which should not be removed and so is treated as used.
   /// </summary>
   [MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
+  [ExcludeFromCodeCoverage]
   public sealed class PublicAPIAttribute : Attribute
   {
     public PublicAPIAttribute() { }
@@ -412,6 +422,7 @@ namespace MineSearch.Common.Annotations
   /// Path can be relative or absolute, starting from web root (~).
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
+  [ExcludeFromCodeCoverage]
   public sealed class PathReferenceAttribute : Attribute
   {
     public PathReferenceAttribute() { }
@@ -504,6 +515,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspMvcAreaMasterLocationFormatAttribute : Attribute
   {
     public AspMvcAreaMasterLocationFormatAttribute(string format)
@@ -515,6 +527,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspMvcAreaPartialViewLocationFormatAttribute : Attribute
   {
     public AspMvcAreaPartialViewLocationFormatAttribute(string format)
@@ -526,6 +539,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspMvcAreaViewLocationFormatAttribute : Attribute
   {
     public AspMvcAreaViewLocationFormatAttribute(string format)
@@ -537,6 +551,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspMvcMasterLocationFormatAttribute : Attribute
   {
     public AspMvcMasterLocationFormatAttribute(string format)
@@ -548,6 +563,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspMvcPartialViewLocationFormatAttribute : Attribute
   {
     public AspMvcPartialViewLocationFormatAttribute(string format)
@@ -559,6 +575,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspMvcViewLocationFormatAttribute : Attribute
   {
     public AspMvcViewLocationFormatAttribute(string format)
@@ -576,6 +593,7 @@ namespace MineSearch.Common.Annotations
   /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspMvcActionAttribute : Attribute
   {
     public AspMvcActionAttribute() { }
@@ -593,6 +611,7 @@ namespace MineSearch.Common.Annotations
   /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspMvcAreaAttribute : Attribute
   {
     public AspMvcAreaAttribute() { }
@@ -611,6 +630,7 @@ namespace MineSearch.Common.Annotations
   /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspMvcControllerAttribute : Attribute
   {
     public AspMvcControllerAttribute() { }
@@ -699,6 +719,7 @@ namespace MineSearch.Common.Annotations
   public sealed class AspMvcActionSelectorAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field)]
+  [ExcludeFromCodeCoverage]
   public sealed class HtmlElementAttributesAttribute : Attribute
   {
     public HtmlElementAttributesAttribute() { }
@@ -711,6 +732,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
+  [ExcludeFromCodeCoverage]
   public sealed class HtmlAttributeValueAttribute : Attribute
   {
     public HtmlAttributeValueAttribute([NotNull] string name)
@@ -733,6 +755,7 @@ namespace MineSearch.Common.Annotations
   /// Indicates how method invocation affects content of the collection.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]
+  [ExcludeFromCodeCoverage]
   public sealed class CollectionAccessAttribute : Attribute
   {
     public CollectionAccessAttribute(CollectionAccessType collectionAccessType)
@@ -770,6 +793,7 @@ namespace MineSearch.Common.Annotations
   /// the attribute is the assertion type.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
+  [ExcludeFromCodeCoverage]
   public sealed class AssertionConditionAttribute : Attribute
   {
     public AssertionConditionAttribute(AssertionConditionType conditionType)
@@ -844,6 +868,7 @@ namespace MineSearch.Common.Annotations
   public sealed class XamlItemBindingOfItemsControlAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspChildControlTypeAttribute : Attribute
   {
     public AspChildControlTypeAttribute(string tagName, Type controlType)
@@ -866,6 +891,7 @@ namespace MineSearch.Common.Annotations
   public sealed class AspMethodPropertyAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspRequiredAttributeAttribute : Attribute
   {
     public AspRequiredAttributeAttribute([NotNull] string attribute)
@@ -877,6 +903,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Property)]
+  [ExcludeFromCodeCoverage]
   public sealed class AspTypePropertyAttribute : Attribute
   {
     public bool CreateConstructorReferences { get; private set; }
@@ -888,6 +915,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class RazorImportNamespaceAttribute : Attribute
   {
     public RazorImportNamespaceAttribute(string name)
@@ -899,6 +927,7 @@ namespace MineSearch.Common.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [ExcludeFromCodeCoverage]
   public sealed class RazorInjectionAttribute : Attribute
   {
     public RazorInjectionAttribute(string type, string fieldName)
