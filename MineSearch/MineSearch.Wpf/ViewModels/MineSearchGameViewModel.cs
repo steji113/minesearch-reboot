@@ -135,7 +135,7 @@ namespace MineSearch.Wpf.ViewModels
         /// <param name="gameSettings">Game settings to use.</param>
         public MineSearchGameViewModel(IGameSettings gameSettings)
         {
-            NewGameCommand = new DelegateCommand(NewGame);
+            NewGameCommand = new DelegateCommand<IGameSettings>(NewGame);
             StartGameCommand = new DelegateCommand(StartGame);
             EndGameCommand = new DelegateCommand(EndGame);
 
@@ -148,22 +148,21 @@ namespace MineSearch.Wpf.ViewModels
             NewGame(gameSettings);
         }
 
-        private void NewGame()
-        {
-            NewGame(GameSettings);
-        }
-
         private void NewGame(IGameSettings gameSettings)
         {
             _gameTimer.Stop();
 
-            GameSettings = gameSettings;
+            if (gameSettings != null)
+            {
+                GameSettings = gameSettings;
+            }
+
             Game = new MineSearchGame(GameSettings);
             CreateCellViewModels();
             GameDurationSeconds = 0;
             GameStatus = GameStatus.Neutral;
 
-            PrintBoard();
+            //PrintBoard();
         }
 
         private void StartGame()

@@ -7,7 +7,7 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace MineSearch.Wpf.ViewModels
 {
-    public class SettingsViewModel : ViewModelBase
+    public class SettingsViewModel : ViewModelBase, INotification, IInteractionRequestAware
     {
         #region Commands
 
