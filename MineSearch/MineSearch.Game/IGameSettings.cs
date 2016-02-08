@@ -10,17 +10,17 @@ namespace MineSearch.Game
         /// <summary>
         /// Number of rows.
         /// </summary>
-        int Rows { get; }
+        int Rows { get; set; }
 
         /// <summary>
         /// Number of columns.
         /// </summary>
-        int Columns { get; }
+        int Columns { get; set; }
 
         /// <summary>
         /// Number of mines.
         /// </summary>
-        int MineCount { get; }
+        int MineCount { get; set; }
 
         /// <summary>
         /// Point generator.
