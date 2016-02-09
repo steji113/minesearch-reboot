@@ -3,11 +3,11 @@
 namespace MineSearch.Wpf.Views.UserControls
 {
     /// <summary>
-    /// Interaction logic for CellView.xaml
+    /// Interaction logic for SafeCellView.xaml
     /// </summary>
-    public partial class CellView
+    public partial class SafeCellView
     {
-        public CellView()
+        public SafeCellView()
         {
             InitializeComponent();
         }

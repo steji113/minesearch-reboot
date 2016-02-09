@@ -106,8 +106,13 @@
     <Compile Include="ViewModels\ICellViewModel.cs" />
     <Compile Include="ViewModels\IMineSearchGameViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MineCellViewModel.cs" />
     <Compile Include="ViewModels\MineSearchGameViewModel.cs" />
     <Page Include="Resources\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CellMatrixView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,7 +120,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\MineCellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\MineSearchGameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SafeCellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,11 +144,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\SafeCellViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Views\UserControls\CellMatrixView.xaml.cs">
+      <DependentUpon>CellMatrixView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\CellView.xaml.cs">
       <DependentUpon>CellView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\MineCellView.xaml.cs">
+      <DependentUpon>MineCellView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\MineSearchGameView.xaml.cs">
       <DependentUpon>MineSearchGameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\SafeCellView.xaml.cs">
+      <DependentUpon>SafeCellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

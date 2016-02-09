@@ -56,5 +56,17 @@ namespace MineSearch.Game
             MineCount = mineCount;
             PointGenerator = generator;
         }
+
+        /// <summary>
+        /// Initializes a copy of the <see cref="IGameSettings"/> class.
+        /// </summary>
+        /// <param name="rhs">Settings to copy.</param>
+        public GameSettings(IGameSettings rhs)
+        {
+            Rows = rhs.Rows;
+            Columns = rhs.Columns;
+            MineCount = rhs.MineCount;
+            PointGenerator = rhs.PointGenerator;
+        }
     }
 }

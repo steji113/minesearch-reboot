@@ -3,18 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:game="clr-namespace:MineSearch.Game;assembly=MineSearch.Game"
-             xmlns:converters="clr-namespace:MineSearch.Wpf.Converters"
+             xmlns:viewModels="clr-namespace:MineSearch.Wpf.ViewModels"
+             xmlns:userControls="clr-namespace:MineSearch.Wpf.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Width="26" Height="26">
-        <Grid.Resources>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
-            <converters:AdjacentMineCountToStringConverter x:Key="AdjacentMineCountToStringConverter" />
-            <converters:AdjacentMineCountToColorConverter x:Key="AdjacentMineCountToColorConverter" />
-            <converters:ExplosionSourceToColorConverter x:Key="ExplosionSourceToColorConverter" />
-        </Grid.Resources>
         <Button
             Command="{Binding RevealCommand}">
             <Button.InputBindings>
@@ -25,57 +18,16 @@
             <Button.Template>
                 <ControlTemplate>
                     <Grid Cursor="Hand">
-                        <Border 
-                            Visibility="{Binding Cell.Revealed, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
-                            BorderBrush="{StaticResource CellCoveredBorder}" BorderThickness="2">
-                            <Grid
-                                Background="LightGray">
-                                <ContentControl 
-                                    Template="{StaticResource FlagIcon}"
-                                    Width="16"
-                                    Height="16"
-                                    Visibility="{Binding Cell.Flagged, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center" />
-                            </Grid>
-                        </Border>
-                        <Border 
-                            Visibility="{Binding Cell.Revealed, Converter={StaticResource BooleanToVisibilityConverter}}"
-                            BorderBrush="{StaticResource CellRevealedBorder}" BorderThickness="1">
-                            <Grid>
-                                <ContentControl Content="{Binding Cell}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <ContentControl.Resources>
-                                        <DataTemplate DataType="{x:Type game:SafeCell}">
-                                            <ContentControl>
-                                                <Grid
-                                                    Background="LightGray">
-                                                    <TextBlock
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center"
-                                                        FontSize="16"
-                                                        FontWeight="ExtraBold"
-                                                        FontFamily="Courier New"
-                                                        Foreground="{Binding AdjacentMineCount, Converter={StaticResource AdjacentMineCountToColorConverter}}"
-                                                        Text="{Binding AdjacentMineCount, Converter={StaticResource AdjacentMineCountToStringConverter}}"
-                                                        Visibility="{Binding Revealed, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                                </Grid>
-                                            </ContentControl>
-                                        </DataTemplate>
-                                        <DataTemplate DataType="{x:Type game:MineCell}">
-                                            <Grid Background="{Binding ExplosionSource, Converter={StaticResource ExplosionSourceToColorConverter}}">
-                                                <ContentControl 
-                                                    Template="{StaticResource MineIcon}"
-                                                    Width="16"
-                                                    Height="16"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center">
-                                                </ContentControl>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ContentControl.Resources>
-                                </ContentControl>
-                            </Grid>
-                        </Border>
+                        <ContentControl Content="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <ContentControl.Resources>
+                                <DataTemplate DataType="{x:Type viewModels:SafeCellViewModel}">
+                                    <userControls:SafeCellView />
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type viewModels:MineCellViewModel}">
+                                    <userControls:MineCellView />
+                                </DataTemplate>
+                            </ContentControl.Resources>
+                        </ContentControl>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
