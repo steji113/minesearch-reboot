@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DigitalDisplay.Wpf.Views
 {
     /// <summary>
-    /// Interaction logic for DigitalTimerView.xaml
+    /// Interaction logic for DigitalDisplayView.xaml
     /// </summary>
-    public partial class DigitalTimerView : UserControl
+    public partial class DigitalDisplayView : UserControl
     {
-        public DigitalTimerView()
+        public DigitalDisplayView()
         {
             InitializeComponent();
         }

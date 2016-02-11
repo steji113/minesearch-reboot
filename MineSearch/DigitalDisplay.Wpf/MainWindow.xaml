@@ -9,6 +9,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Button Width="30" Click="ButtonBase_OnClick"></Button>
-        <views:DigitView Grid.Row="1" x:Name="DigitViewTest" />
+        <views:DigitalDisplayView Grid.Row="1" Background="Black" x:Name="DigitalDisplay" />
     </Grid>
 </Window>

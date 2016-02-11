@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using DigitalDisplay.Wpf.ViewModels;
 
 namespace DigitalDisplay.Wpf
@@ -24,12 +11,12 @@ namespace DigitalDisplay.Wpf
         public MainWindow()
         {
             InitializeComponent();
-            DigitViewTest.DataContext = new DigitViewModel();
+            DigitalDisplay.DataContext = new DigitalDisplayViewModel(3);
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var vm = DigitViewTest.DataContext as DigitViewModel;
+            var vm = DigitalDisplay.DataContext as DigitalDisplayViewModel;
             vm.Value++;
         }
     }
