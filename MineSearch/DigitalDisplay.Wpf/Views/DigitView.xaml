@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="DigitalDisplay.Wpf.Views.DigitView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:DigitalDisplay.Wpf.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="44" d:DesignWidth="22">
+    <Grid>
+        <Grid.Resources>
+            <converters:ValueToDigitTemplateConverter x:Key="ValueToDigitTemplateConverter" />
+        </Grid.Resources>
+        <ContentControl 
+            Template="{Binding Value, Converter={StaticResource ValueToDigitTemplateConverter}}" />
+    </Grid>
+</UserControl>
