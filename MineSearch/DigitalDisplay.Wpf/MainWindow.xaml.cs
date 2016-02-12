@@ -11,13 +11,13 @@ namespace DigitalDisplay.Wpf
         public MainWindow()
         {
             InitializeComponent();
-            DigitalDisplay.DataContext = new DigitalDisplayViewModel(3);
+            DataContext = new MainWindowViewModel();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var vm = DigitalDisplay.DataContext as DigitalDisplayViewModel;
-            vm.Value++;
+            var vm = DataContext as MainWindowViewModel;
+            vm.GameDurationSeconds++;
         }
     }
 }

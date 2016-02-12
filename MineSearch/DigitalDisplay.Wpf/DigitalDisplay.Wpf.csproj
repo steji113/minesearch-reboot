@@ -54,8 +54,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ValueToDigitTemplateConverter.cs" />
-    <Compile Include="ViewModels\DigitalDisplayViewModel.cs" />
     <Compile Include="ViewModels\DigitViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\DigitalDisplayView.xaml.cs">
       <DependentUpon>DigitalDisplayView.xaml</DependentUpon>
     </Compile>

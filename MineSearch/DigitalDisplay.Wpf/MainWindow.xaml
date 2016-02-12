@@ -9,6 +9,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Button Width="30" Click="ButtonBase_OnClick"></Button>
-        <views:DigitalDisplayView Grid.Row="1" Background="Black" x:Name="DigitalDisplay" />
+        <views:DigitalDisplayView
+            Grid.Row="1" 
+            Digits="3"
+            Value="{Binding GameDurationSeconds, Mode=TwoWay}"
+            Background="Black" />
     </Grid>
 </Window>

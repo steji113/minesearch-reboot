@@ -4,7 +4,7 @@
 
     <SolidColorBrush x:Key="ActiveColorBrush">Red</SolidColorBrush>
     <SolidColorBrush x:Key="InactiveColorBrush">#7B0000</SolidColorBrush>
-    <system:Double x:Key="InactiveOpacity">0.35</system:Double>
+    <system:Double x:Key="InactiveOpacity">0.25</system:Double>
 
     <Style x:Key="DigitActiveStyle" TargetType="Polygon">
         <Setter Property="Fill" Value="{StaticResource ActiveColorBrush}" />

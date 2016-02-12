@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:DigitalDisplay.Wpf.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <ItemsControl ItemsSource="{Binding DigitViewModels}">
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="DigitalDisplay">
+    <ItemsControl ItemsSource="{Binding ElementName=DigitalDisplay,Path=DigitViewModels}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel Orientation="Horizontal" />
