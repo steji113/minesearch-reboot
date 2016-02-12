@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using DigitalDisplay.Wpf.ViewModels;
 
-namespace DigitalDisplay.Wpf.Views
+namespace DigitalDisplay.Wpf
 {
     /// <summary>
     /// Interaction logic for DigitalDisplayView.xaml

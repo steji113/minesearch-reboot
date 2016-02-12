@@ -198,6 +198,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DigitalDisplay.Wpf\DigitalDisplay.Wpf.csproj">
+      <Project>{1fd8cb27-e14b-4d83-beec-5d5b36ce90ca}</Project>
+      <Name>DigitalDisplay.Wpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MineSearch.Common\MineSearch.Common.csproj">
       <Project>{3b3dc4a8-4128-4c9c-aaa4-78ba9e22d8d2}</Project>
       <Name>MineSearch.Common</Name>
