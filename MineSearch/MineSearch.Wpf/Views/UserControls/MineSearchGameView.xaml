@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:userControls="clr-namespace:MineSearch.Wpf.Views.UserControls"
              xmlns:converters="clr-namespace:MineSearch.Wpf.Converters"
+             xmlns:wpf="clr-namespace:DigitalDisplay.Wpf;assembly=DigitalDisplay.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Border 
@@ -28,11 +29,20 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <TextBox
-                        Style="{StaticResource DisplayTextBoxStyle}"
-                        HorizontalAlignment="Left"
+                    <Grid
+                        Width="36"
+                        Height="30"
                         Margin="10,0,0,0"
-                        Text="{Binding Game.RemainingFlagCount}" />
+                        HorizontalAlignment="Left"
+                        Background="Black">
+                        <wpf:DigitalDisplayView
+                            Width="30"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Digits="2"
+                            Value="{Binding Game.RemainingFlagCount, Mode=TwoWay}" />
+                    </Grid>
                     <Button
                         Grid.Column="1"
                         Command="{Binding NewGameCommand}"
@@ -43,12 +53,21 @@
                                 Template="{Binding GameStatus, Converter={StaticResource GameStatusToIconConverter}}" />
                         </Grid>
                     </Button>
-                    <TextBox
+                    <Grid
                         Grid.Column="2"
-                        Style="{StaticResource DisplayTextBoxStyle}"
-                        HorizontalAlignment="Right"
+                        Width="50"
+                        Height="30"
                         Margin="0,0,10,0"
-                        Text="{Binding GameDurationSeconds}" />
+                        HorizontalAlignment="Right"
+                        Background="Black">
+                        <wpf:DigitalDisplayView
+                            Width="44"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Digits="3"
+                            Value="{Binding GameDurationSeconds, Mode=TwoWay}" />
+                    </Grid>
                 </Grid>
             </Border>
             <Border
