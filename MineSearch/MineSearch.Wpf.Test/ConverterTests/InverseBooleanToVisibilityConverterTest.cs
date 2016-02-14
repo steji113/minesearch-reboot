@@ -13,6 +13,7 @@ namespace MineSearch.Wpf.Test.ConverterTests
             var converter = new InverseBooleanToVisibilityConverter();
 
             Assert.AreEqual(Visibility.Visible, converter.Convert(false, typeof(Visibility), null, null));
+            Assert.AreEqual(false, converter.ConvertBack(Visibility.Visible, typeof(bool), null, null));
         }
 
         [TestMethod]
@@ -21,6 +22,7 @@ namespace MineSearch.Wpf.Test.ConverterTests
             var converter = new InverseBooleanToVisibilityConverter();
 
             Assert.AreEqual(Visibility.Collapsed, converter.Convert(true, typeof(Visibility), null, null));
+            Assert.AreEqual(true, converter.ConvertBack(Visibility.Collapsed, typeof(bool), null, null));
         }
     }
 }
