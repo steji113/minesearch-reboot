@@ -95,10 +95,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CellViewModelTest.cs" />
-    <Compile Include="MineSearchGameViewModelTest.cs" />
+    <Compile Include="ViewModelTests\CellViewModelTest.cs" />
+    <Compile Include="ViewModelTests\MineSearchGameViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SettingsViewModelTest.cs" />
+    <Compile Include="ViewModelTests\SettingsViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MineSearch.Common\MineSearch.Common.csproj">
@@ -116,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ConverterTests\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
