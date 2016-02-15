@@ -62,6 +62,18 @@ namespace MineSearch.Game
         void RemoveFlag(Point point);
 
         /// <summary>
+        /// Marks a cell as questionable.
+        /// </summary>
+        /// <param name="point">Coordinates of cell to mark as questionable.</param>
+        void MarkCellQuestionable(Point point);
+
+        /// <summary>
+        /// Removes the questionable state from a cell.
+        /// </summary>
+        /// <param name="point">Coordinates of cell to remove questionable state from.</param>
+        void RemoveQuestionable(Point point);
+
+        /// <summary>
         /// Reveals a cell.
         /// </summary>
         /// <param name="point">Coordinates of cell to reveal.</param>

@@ -16,6 +16,7 @@ namespace MineSearch.Wpf.Models
         public DefaultGameSettings(IPointGenerator generator)
             : base(DefaultRows, DefaultColumns, DefaultMineCount, generator)
         {
+            UseQuestionableState = true;
         }
     }
 }
