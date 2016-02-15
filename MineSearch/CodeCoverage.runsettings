@@ -30,7 +30,7 @@
             <ModulePaths>
               <Exclude>
                 <!-- Exclude anything that ends in .Test.dll -->
-                <ModulePath>.*\.Test.dll$</ModulePath>
+                <ModulePath>.*\.Test\.dll$</ModulePath>
               </Exclude>
             </ModulePaths>
 
@@ -54,6 +54,8 @@
                 <Source>.*\\public\\sdk\\.*</Source>
                 <Source>.*\\microsoft sdks\\.*</Source>
                 <Source>.*\\vc\\include\\.*</Source>
+                <!-- Exclude the views. These will be tested via UI automation. -->
+                <Source>.*\\Views\\.*</Source>
               </Exclude>
             </Sources>
 
