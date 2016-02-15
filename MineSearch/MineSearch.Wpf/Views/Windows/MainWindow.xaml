@@ -4,7 +4,9 @@
         xmlns:userControls="clr-namespace:MineSearch.Wpf.Views.UserControls"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:prism="http://prismlibrary.com/"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding SettingsRequest, Mode=OneWay}">
             <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
