@@ -150,7 +150,7 @@ namespace MineSearch.Wpf.ViewModels
 
         private void NewGame(IGameSettings gameSettings)
         {
-            _gameTimer.Stop();
+            InactivateGame();
 
             if (gameSettings != null)
             {
@@ -173,9 +173,14 @@ namespace MineSearch.Wpf.ViewModels
 
         private void EndGame()
         {
+            InactivateGame();
+            GameStatus = Game.GameWon ? GameStatus.Won : GameStatus.Lost;
+        }
+
+        private void InactivateGame()
+        {
             _gameTimer.Stop();
             GameActive = false;
-            GameStatus = Game.GameWon ? GameStatus.Won : GameStatus.Lost;
         }
 
         private void CreateCellViewModels()
