@@ -19,6 +19,11 @@ namespace MineSearch.Wpf.ViewModels
         /// </summary>
         public ICommand SettingsCommand { get; private set; }
 
+        /// <summary>
+        /// Exit command.
+        /// </summary>
+        public ICommand ExitCommand { get; private set; }
+
         #endregion
 
         #region Properties
@@ -45,6 +50,7 @@ namespace MineSearch.Wpf.ViewModels
             GameViewModel = new MineSearchGameViewModel(defaultSettings);
             SettingsRequest = new InteractionRequest<SettingsViewModel>();
             SettingsCommand = new DelegateCommand(RaiseSettingsRequest);
+            ExitCommand = new DelegateCommand<IBaseWindow>(CloseWindow);
         }
 
         private void RaiseSettingsRequest()
@@ -61,6 +67,14 @@ namespace MineSearch.Wpf.ViewModels
                     GameViewModel.NewGameCommand.Execute(result.GameSettings);
                 }
             });
+        }
+
+        private void CloseWindow(IBaseWindow window)
+        {
+            if (window != null)
+            {
+                window.Close();
+            }
         }
     }
 }
