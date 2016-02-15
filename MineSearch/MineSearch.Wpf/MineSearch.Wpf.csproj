@@ -100,8 +100,10 @@
     <Compile Include="Converters\ExplosionSourceToColorConverter.cs" />
     <Compile Include="Converters\GameStatusToIconConverter.cs" />
     <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
+    <Compile Include="Views\Windows\BaseWindow.cs" />
     <Compile Include="Models\DefaultGameSettings.cs" />
     <Compile Include="Models\GameStatus.cs" />
+    <Compile Include="Models\IBaseWindow.cs" />
     <Compile Include="ViewModels\CellViewModel.cs" />
     <Compile Include="ViewModels\ICellViewModel.cs" />
     <Compile Include="ViewModels\IMineSearchGameViewModel.cs" />
