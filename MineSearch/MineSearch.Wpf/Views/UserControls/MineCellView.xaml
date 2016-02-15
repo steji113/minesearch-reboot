@@ -18,13 +18,25 @@
             BorderBrush="{StaticResource CellCoveredBorder}"
             BorderThickness="2"
             Background="LightGray">
-            <ContentControl 
-                Template="{StaticResource FlagIcon}"
-                Width="16"
-                Height="16"
-                Visibility="{Binding Cell.Flagged, Converter={StaticResource BooleanToVisibilityConverter}}"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
+            <Grid>
+                <!-- Flagged State -->
+                <ContentControl 
+                    Template="{StaticResource FlagIcon}"
+                    Width="16"
+                    Height="16"
+                    Visibility="{Binding Cell.Flagged, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" />
+                <!-- Questionable State -->
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="ExtraBold"
+                    FontFamily="Courier New"
+                    Text="?"
+                    Visibility="{Binding Cell.Questionable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </Grid>
         </Border>
         <!-- Revealed state -->
         <Border 
