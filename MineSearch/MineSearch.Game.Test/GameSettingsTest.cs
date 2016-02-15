@@ -68,13 +68,17 @@ namespace MineSearch.Game.Test
         [TestMethod]
         public void TestCopyConstructor()
         {
-            IGameSettings gameSettings1 = new GameSettings(10, 10, 10, _generator);
+            IGameSettings gameSettings1 = new GameSettings(10, 10, 10, _generator)
+            {
+                UseQuestionableState = true
+            };
             IGameSettings gameSettings2 = new GameSettings(gameSettings1);
 
             Assert.AreEqual(gameSettings1.Rows, gameSettings2.Rows);
             Assert.AreEqual(gameSettings1.Columns, gameSettings2.Columns);
             Assert.AreEqual(gameSettings1.MineCount, gameSettings2.MineCount);
             Assert.AreEqual(gameSettings1.PointGenerator, gameSettings2.PointGenerator);
+            Assert.AreEqual(gameSettings1.UseQuestionableState, gameSettings2.UseQuestionableState);
         }
 
         private IPointGenerator _generator;
