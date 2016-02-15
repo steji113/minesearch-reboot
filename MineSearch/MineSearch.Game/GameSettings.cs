@@ -28,6 +28,11 @@ namespace MineSearch.Game
         /// </summary>
         public IPointGenerator PointGenerator { get; private set; }
 
+        /// <summary>
+        /// Whether or not cells can be marked questionable.
+        /// </summary>
+        public bool UseQuestionableState { get; set; }
+
         public GameSettings(int rows, int columns, int mineCount, IPointGenerator generator)
         {
             if (rows <= 0)
@@ -55,6 +60,7 @@ namespace MineSearch.Game
             Columns = columns;
             MineCount = mineCount;
             PointGenerator = generator;
+            UseQuestionableState = false;
         }
 
         /// <summary>
@@ -67,6 +73,7 @@ namespace MineSearch.Game
             Columns = rhs.Columns;
             MineCount = rhs.MineCount;
             PointGenerator = rhs.PointGenerator;
+            UseQuestionableState = rhs.UseQuestionableState;
         }
     }
 }

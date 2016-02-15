@@ -28,6 +28,22 @@ namespace MineSearch.Game
         }
 
         /// <summary>
+        /// Whether or not the cell has been marked questionable.
+        /// </summary>
+        public bool Questionable
+        {
+            get { return _questionable; }
+            set
+            {
+                if (value != _questionable)
+                {
+                    _questionable = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
         /// Whether or not the cell has been revealed.
         /// </summary>
         public bool Revealed
@@ -59,6 +75,7 @@ namespace MineSearch.Game
 
         private readonly Point _coordinates;
         private bool _flagged;
+        private bool _questionable;
         private bool _revealed;
 
         #endregion

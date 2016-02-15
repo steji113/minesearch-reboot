@@ -41,6 +41,11 @@ namespace MineSearch.Wpf.ViewModels
         /// </summary>
         public ICell Cell { get; private set; }
 
+        /// <summary>
+        /// Whether or not to use the questionable state.
+        /// </summary>
+        public bool UseQuestionableState { get; set; }
+
         #endregion
 
         /// <summary>
@@ -53,6 +58,7 @@ namespace MineSearch.Wpf.ViewModels
             GameViewModel = gameViewModel;
             Game = gameViewModel.Game;
             Cell = cell;
+            UseQuestionableState = gameViewModel.GameSettings.UseQuestionableState;
             FlagCommand = new DelegateCommand(FlagCell);
             RevealCommand = new DelegateCommand(RevealCell);
         }
@@ -69,15 +75,24 @@ namespace MineSearch.Wpf.ViewModels
             {
                 GameViewModel.StartGameCommand.Execute(null);
             }
-            // Has this cell already been flagged?
             if (Cell.Flagged)
             {
-                // Yes. Let's remove the flag.
+                // Remove the flag.
                 Game.RemoveFlag(Cell.Coordinates);
+                // If the questionable state is being used, mark the cell as questionable.
+                if (UseQuestionableState)
+                {
+                    Game.MarkCellQuestionable(Cell.Coordinates);
+                }
+            }
+            else if (Cell.Questionable)
+            {
+                // Remove the questionable state.
+                Game.RemoveQuestionable(Cell.Coordinates);
             }
             else
             {
-                // No.  Let's flag the cell.
+                // Flag the cell.
                 Game.FlagCell(Cell.Coordinates);
                 // End the game if this flag resulted in game over.
                 if (Game.GameOver)

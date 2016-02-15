@@ -130,6 +130,32 @@ namespace MineSearch.Game
         }
 
         /// <summary>
+        /// Marks a cell as questionable.
+        /// </summary>
+        /// <param name="point">Coordinates of cell to mark as questionable.</param>
+        public void MarkCellQuestionable(Point point)
+        {
+            var cell = Cells[point.X, point.Y];
+            if (cell != null)
+            {
+                cell.Questionable = true;
+            }
+        }
+
+        /// <summary>
+        /// Removes the questionable state from a cell.
+        /// </summary>
+        /// <param name="point">Coordinates of cell to remove questionable state from.</param>
+        public void RemoveQuestionable(Point point)
+        {
+            var cell = Cells[point.X, point.Y];
+            if (cell != null)
+            {
+                cell.Questionable = false;
+            }
+        }
+
+        /// <summary>
         /// Reveals a cell.
         /// </summary>
         /// <param name="point">Coordinates of cell to reveal.</param>

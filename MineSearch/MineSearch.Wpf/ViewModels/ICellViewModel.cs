@@ -32,5 +32,10 @@ namespace MineSearch.Wpf.ViewModels
         /// Cell.
         /// </summary>
         ICell Cell { get; }
+
+        /// <summary>
+        /// Whether or not to use the questionable state.
+        /// </summary>
+        bool UseQuestionableState { get; set; }
     }
 }
