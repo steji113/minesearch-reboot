@@ -56,6 +56,25 @@ namespace MineSearch.Game.Test
         }
 
         [TestMethod]
+        public void TestMarkCellQuestionable()
+        {
+            var cellToMark = _game.Cells.First(cell => cell is MineCell);
+            _game.MarkCellQuestionable(cellToMark.Coordinates);
+
+            Assert.IsTrue(cellToMark.Questionable);
+        }
+
+        [TestMethod]
+        public void TesRemoveQuestionable()
+        {
+            var cellToMark = _game.Cells.First(cell => cell is MineCell);
+            _game.MarkCellQuestionable(cellToMark.Coordinates);
+            _game.RemoveQuestionable(cellToMark.Coordinates);
+
+            Assert.IsFalse(cellToMark.Questionable);
+        }
+
+        [TestMethod]
         public void TestRevealSafeCell()
         {
             var cellToReveal = _game.Cells.First(cell => cell is SafeCell);

@@ -26,5 +26,10 @@ namespace MineSearch.Game
         /// Point generator.
         /// </summary>
         IPointGenerator PointGenerator { get; }
+
+        /// <summary>
+        /// Whether or not cells can be marked questionable.
+        /// </summary>
+        bool UseQuestionableState { get; set; }
     }
 }
