@@ -65,19 +65,13 @@ namespace MineSearch.Wpf.Test.ViewModelTests
         [TestMethod]
         public void TestRevealCommand()
         {
-            var mockGameViewModel = new Mock<IMineSearchGameViewModel>();
-            var mockGame = new Mock<IMineSearchGame>();
-            var mockCell = new Mock<ICell>();
+            // Grab the first safe view model
+            var cellViewModel = _gameViewModel.CellViewModels[0].First(vm => vm is SafeCellViewModel);
+            var cell = cellViewModel.Cell;
 
-            mockGame.Setup(g => g.RevealCell(It.IsAny<Point>()));
-            mockGameViewModel.SetupGet(v => v.Game).Returns(mockGame.Object);
-            mockGameViewModel.SetupGet(vm => vm.GameActive).Returns(true);
-
-            // Create the view model and execute the flag command
-            var cellViewModel = new CellViewModel(mockGameViewModel.Object, mockCell.Object);
+            // Execute the reveal command
             cellViewModel.RevealCommand.Execute(null);
-
-            mockGame.Verify(g => g.RevealCell(It.IsAny<Point>()), Times.Once());
+            Assert.IsTrue(cell.Revealed);
         }
 
         private IGameSettings _gameSettings;

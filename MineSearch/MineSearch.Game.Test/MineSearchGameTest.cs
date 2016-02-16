@@ -36,8 +36,6 @@ namespace MineSearch.Game.Test
             _game.FlagCell(cellToFlag.Coordinates);
 
             Assert.IsTrue(cellToFlag.Flagged);
-            Assert.AreEqual(_game.FlaggedCells.Count(), 1);
-            Assert.AreEqual(_game.FlaggedCells.First().Coordinates, cellToFlag.Coordinates);
             Assert.IsFalse(_game.GameOver);
             Assert.IsFalse(_game.GameWon);
         }
@@ -49,8 +47,6 @@ namespace MineSearch.Game.Test
             _game.FlagCell(cellToFlag.Coordinates);
 
             Assert.IsTrue(cellToFlag.Flagged);
-            Assert.AreEqual(_game.FlaggedCells.Count(), 1);
-            Assert.AreEqual(_game.FlaggedCells.First().Coordinates, cellToFlag.Coordinates);
             Assert.IsFalse(_game.GameOver);
             Assert.IsFalse(_game.GameWon);
         }
@@ -97,48 +93,17 @@ namespace MineSearch.Game.Test
         }
 
         [TestMethod]
-        public void TestWinGameTiny()
-        {
-            var generator = new RandomPointGenerator();
-            IGameSettings tinyGameSettings = new GameSettings(1, 1, 1, generator);
-            IMineSearchGame tinyGame = new MineSearchGame(tinyGameSettings);
-
-            tinyGame.FlagCell(new Point(0, 0));
-
-            Assert.IsTrue(tinyGame.GameOver);
-            Assert.IsTrue(tinyGame.GameWon);
-        }
-
-        [TestMethod]
-        public void TestWinGameSmall()
-        {
-            var generator = new RandomPointGenerator();
-            IGameSettings smallGameSettings = new GameSettings(3, 3, 3, generator);
-            IMineSearchGame smallGame = new MineSearchGame(smallGameSettings);
-
-            var mineCoordinates =
-                smallGame.Cells.Where(cell => cell is MineCell).Select(cell => cell.Coordinates);
-            foreach (var coordinate in mineCoordinates)
-            {
-                smallGame.FlagCell(coordinate);
-            }
-
-            Assert.IsTrue(smallGame.GameOver);
-            Assert.IsTrue(smallGame.GameWon);
-        }
-
-        [TestMethod]
-        public void TestNonWin()
+        public void TestWinGame()
         {
             var safeCoordinates =
                 _game.Cells.Where(cell => cell is SafeCell).Select(cell => cell.Coordinates);
             foreach (var coordinate in safeCoordinates)
             {
-                _game.FlagCell(coordinate);
+                _game.RevealCell(coordinate);
             }
 
-            Assert.IsFalse(_game.GameOver);
-            Assert.IsFalse(_game.GameWon);
+            Assert.IsTrue(_game.GameOver);
+            Assert.IsTrue(_game.GameWon);
         }
 
         [TestMethod]

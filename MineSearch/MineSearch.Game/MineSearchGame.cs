@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using MineSearch.Common;
 
 namespace MineSearch.Game
@@ -45,11 +44,6 @@ namespace MineSearch.Game
         }
 
         /// <summary>
-        /// Collection of cells that have been flagged.
-        /// </summary>
-        public IEnumerable<ICell> FlaggedCells { get { return Cells.Where(cell => cell.Flagged); } }
-
-        /// <summary>
         /// Whether or not the game is over.
         /// </summary>
         public bool GameOver
@@ -76,8 +70,7 @@ namespace MineSearch.Game
         {
             get
             {
-                var flaggedMineCells = FlaggedCells.Where(cell => cell is MineCell);
-                return flaggedMineCells.Count() == MineCount;
+                return _remainingCellsToReveal == 0;
             }
         }
 
@@ -88,6 +81,7 @@ namespace MineSearch.Game
             var cellsFactory = new MineSearchCellsFactory(gameSettings);
             Cells = cellsFactory.CreateCells();
             RemainingFlagCount = gameSettings.MineCount;
+            _remainingCellsToReveal = Cells.Count(cell => cell is SafeCell);
         }
 
         /// <summary>
@@ -105,10 +99,6 @@ namespace MineSearch.Game
             if (!cell.Revealed && !cell.Flagged && RemainingFlagCount > 0)
             {
                 cell.Flagged = true;
-                if (GameWon)
-                {
-                    GameOver = true;
-                }
                 RemainingFlagCount--;
                 return true;
             }
@@ -171,6 +161,14 @@ namespace MineSearch.Game
                     mineCell.ExplosionSource = true;
                     GameOver = true;
                 }
+                else
+                {
+                    _remainingCellsToReveal--;
+                    if (GameWon)
+                    {
+                        GameOver = true;
+                    }
+                }
             }
         }
 
@@ -210,6 +208,7 @@ namespace MineSearch.Game
 
         private bool _gameOver;
         private int _remainingFlagCount;
+        private int _remainingCellsToReveal;
 
         #endregion
     }
