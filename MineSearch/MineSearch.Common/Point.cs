@@ -41,10 +41,15 @@ namespace MineSearch.Common
         /// <returns>(x, y) coordinates of the cell</returns>
         public static Point FromIndex(int index, int columns)
         {
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException("index", "index must be greater than or equal to 0");
+            }
             if (columns <= 0)
             {
                 throw new ArgumentOutOfRangeException("columns", "columns must be greater than 0");
             }
+
             int x = index % columns;
             int y = index / columns;
             return new Point(x, y);
