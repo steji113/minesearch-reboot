@@ -123,6 +123,13 @@ namespace MineSearch.Game.Test
                 smallGame.FlagCell(coordinate);
             }
 
+            var safeCoordinates =
+                smallGame.Cells.Where(cell => cell is SafeCell).Select(cell => cell.Coordinates);
+            foreach (var coordinate in safeCoordinates)
+            {
+                smallGame.RevealCell(coordinate);
+            }
+
             Assert.IsTrue(smallGame.GameOver);
             Assert.IsTrue(smallGame.GameWon);
         }

@@ -77,7 +77,7 @@ namespace MineSearch.Game
             get
             {
                 var flaggedMineCells = FlaggedCells.Where(cell => cell is MineCell);
-                return flaggedMineCells.Count() == MineCount;
+                return flaggedMineCells.Count() == MineCount && _remainingCellsToReveal == 0;
             }
         }
 
@@ -88,6 +88,7 @@ namespace MineSearch.Game
             var cellsFactory = new MineSearchCellsFactory(gameSettings);
             Cells = cellsFactory.CreateCells();
             RemainingFlagCount = gameSettings.MineCount;
+            _remainingCellsToReveal = Cells.Count(cell => cell is SafeCell);
         }
 
         /// <summary>
@@ -171,6 +172,14 @@ namespace MineSearch.Game
                     mineCell.ExplosionSource = true;
                     GameOver = true;
                 }
+                else
+                {
+                    _remainingCellsToReveal--;
+                    if (GameWon)
+                    {
+                        GameOver = true;
+                    }
+                }
             }
         }
 
@@ -210,6 +219,7 @@ namespace MineSearch.Game
 
         private bool _gameOver;
         private int _remainingFlagCount;
+        private int _remainingCellsToReveal;
 
         #endregion
     }
