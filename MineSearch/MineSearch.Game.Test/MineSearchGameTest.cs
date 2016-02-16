@@ -138,22 +138,6 @@ namespace MineSearch.Game.Test
         }
 
         [TestMethod]
-        public void TestFlagLimit()
-        {
-            int flagLimit = _game.MineCount;
-            // Exhaust flags
-            for (int i = 0; i < flagLimit; i++)
-            {
-                var point = Point.FromIndex(i, _game.Columns);
-                bool flagged = _game.FlagCell(point);
-                Assert.IsTrue(flagged);
-            }
-            // Ensure we cannot flag any more cells
-            var unflaggedCell = _game.Cells.First(cell => !cell.Flagged);
-            Assert.IsFalse(_game.FlagCell(unflaggedCell.Coordinates));
-        }
-
-        [TestMethod]
         public void TestFlagRevealedCell()
         {
             var cell = _game.Cells.First(c => c is SafeCell);
