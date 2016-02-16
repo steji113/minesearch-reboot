@@ -54,14 +54,6 @@ namespace MineSearch.Wpf.Test.ViewModelTests
         [TestMethod]
         public void TestGameStatusWon()
         {
-            // Flag all mine cells.
-            foreach (var row in _gameViewModel.CellViewModels)
-            {
-                foreach (var cellViewModel in row.Where(vm => vm.Cell is MineCell))
-                {
-                    cellViewModel.FlagCommand.Execute(null);
-                }
-            }
             // Reveal all safe cells.
             foreach (var row in _gameViewModel.CellViewModels)
             {

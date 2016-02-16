@@ -97,79 +97,15 @@ namespace MineSearch.Game.Test
         }
 
         [TestMethod]
-        public void TestWinGameTiny()
+        public void TestWinGame()
         {
-            var generator = new RandomPointGenerator();
-            IGameSettings tinyGameSettings = new GameSettings(1, 1, 1, generator);
-            IMineSearchGame tinyGame = new MineSearchGame(tinyGameSettings);
-
-            tinyGame.FlagCell(new Point(0, 0));
-
-            Assert.IsTrue(tinyGame.GameOver);
-            Assert.IsTrue(tinyGame.GameWon);
-        }
-
-        [TestMethod]
-        public void TestWinGameSmall()
-        {
-            var generator = new RandomPointGenerator();
-            IGameSettings smallGameSettings = new GameSettings(3, 3, 3, generator);
-            IMineSearchGame smallGame = new MineSearchGame(smallGameSettings);
-
-            var mineCoordinates =
-                smallGame.Cells.Where(cell => cell is MineCell).Select(cell => cell.Coordinates);
-            foreach (var coordinate in mineCoordinates)
-            {
-                smallGame.FlagCell(coordinate);
-            }
-
-            var safeCoordinates =
-                smallGame.Cells.Where(cell => cell is SafeCell).Select(cell => cell.Coordinates);
-            foreach (var coordinate in safeCoordinates)
-            {
-                smallGame.RevealCell(coordinate);
-            }
-
-            Assert.IsTrue(smallGame.GameOver);
-            Assert.IsTrue(smallGame.GameWon);
-        }
-
-        [TestMethod]
-        public void TestNonWinIncorrectFlags()
-        {
-            var safeCoordinates =
-                _game.Cells.Where(cell => cell is SafeCell).Select(cell => cell.Coordinates);
-            foreach (var coordinate in safeCoordinates)
-            {
-                _game.FlagCell(coordinate);
-            }
-
-            Assert.IsFalse(_game.GameOver);
-            Assert.IsFalse(_game.GameWon);
-        }
-
-        [TestMethod]
-        public void TestNonWinUnrevealedSafeCells()
-        {
-            // Flag each mine cell
-            var mineCoordinates =
-                _game.Cells.Where(cell => cell is MineCell).Select(cell => cell.Coordinates);
-            foreach (var coordinate in mineCoordinates)
-            {
-                _game.FlagCell(coordinate);
-            }
-            // Ensure the game has not been won yet
-            Assert.IsFalse(_game.GameOver);
-            Assert.IsFalse(_game.GameWon);
-
-            // Now reveal the safe cells to win the game
             var safeCoordinates =
                 _game.Cells.Where(cell => cell is SafeCell).Select(cell => cell.Coordinates);
             foreach (var coordinate in safeCoordinates)
             {
                 _game.RevealCell(coordinate);
             }
-            // Ensure the game has now been won
+
             Assert.IsTrue(_game.GameOver);
             Assert.IsTrue(_game.GameWon);
         }
