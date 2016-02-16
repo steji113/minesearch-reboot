@@ -8,7 +8,14 @@ namespace MineSearch.Common.Test
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void TestFromIndexInvalidArgument()
+        public void TestFromIndexInvalidIndexArgument()
+        {
+            Point.FromIndex(-1, 1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestFromIndexInvalidColumnsArgument()
         {
             Point.FromIndex(0, 0);
         }

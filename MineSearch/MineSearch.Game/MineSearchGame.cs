@@ -155,12 +155,17 @@ namespace MineSearch.Game
             if (cell != null && !cell.Revealed && !cell.Flagged)
             {
                 cell.Revealed = true;
-                if (!GameOver && cell is MineCell)
+                // Is it a Mine cell?
+                if (cell is MineCell)
                 {
-                    var mineCell = cell as MineCell;
-                    mineCell.ExplosionSource = true;
-                    GameOver = true;
+                    if (!GameOver)
+                    {
+                        var mineCell = cell as MineCell;
+                        mineCell.ExplosionSource = true;
+                        GameOver = true;
+                    }
                 }
+                // Otherwise must be a Safe cell
                 else
                 {
                     _remainingCellsToReveal--;

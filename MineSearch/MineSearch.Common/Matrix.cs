@@ -155,6 +155,13 @@ namespace MineSearch.Common
         public IEnumerable<T> GetAdjacentCells(T item)
         {
             int index = IndexOf(item);
+
+            // Validate index
+            if (index < 0)
+            {
+                yield break;
+            }
+
             var point = Point.FromIndex(index, Columns);
             int x = point.X;
             int y = point.Y;
