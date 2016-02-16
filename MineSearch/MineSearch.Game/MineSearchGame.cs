@@ -76,8 +76,7 @@ namespace MineSearch.Game
         {
             get
             {
-                var flaggedMineCells = FlaggedCells.Where(cell => cell is MineCell);
-                return flaggedMineCells.Count() == MineCount && _remainingCellsToReveal == 0;
+                return _remainingCellsToReveal == 0;
             }
         }
 
@@ -106,10 +105,6 @@ namespace MineSearch.Game
             if (!cell.Revealed && !cell.Flagged && RemainingFlagCount > 0)
             {
                 cell.Flagged = true;
-                if (GameWon)
-                {
-                    GameOver = true;
-                }
                 RemainingFlagCount--;
                 return true;
             }

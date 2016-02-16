@@ -94,11 +94,6 @@ namespace MineSearch.Wpf.ViewModels
             {
                 // Flag the cell.
                 Game.FlagCell(Cell.Coordinates);
-                // End the game if this flag resulted in game over.
-                if (Game.GameOver)
-                {
-                    GameViewModel.EndGameCommand.Execute(null);
-                }
             }
         }
 
