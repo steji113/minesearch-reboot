@@ -135,7 +135,7 @@ namespace MineSearch.Game.Test
         }
 
         [TestMethod]
-        public void TestNonWin()
+        public void TestNonWinIncorrectFlags()
         {
             var safeCoordinates =
                 _game.Cells.Where(cell => cell is SafeCell).Select(cell => cell.Coordinates);
@@ -146,6 +146,32 @@ namespace MineSearch.Game.Test
 
             Assert.IsFalse(_game.GameOver);
             Assert.IsFalse(_game.GameWon);
+        }
+
+        [TestMethod]
+        public void TestNonWinUnrevealedSafeCells()
+        {
+            // Flag each mine cell
+            var mineCoordinates =
+                _game.Cells.Where(cell => cell is MineCell).Select(cell => cell.Coordinates);
+            foreach (var coordinate in mineCoordinates)
+            {
+                _game.FlagCell(coordinate);
+            }
+            // Ensure the game has not been won yet
+            Assert.IsFalse(_game.GameOver);
+            Assert.IsFalse(_game.GameWon);
+
+            // Now reveal the safe cells to win the game
+            var safeCoordinates =
+                _game.Cells.Where(cell => cell is SafeCell).Select(cell => cell.Coordinates);
+            foreach (var coordinate in safeCoordinates)
+            {
+                _game.RevealCell(coordinate);
+            }
+            // Ensure the game has now been won
+            Assert.IsTrue(_game.GameOver);
+            Assert.IsTrue(_game.GameWon);
         }
 
         [TestMethod]
