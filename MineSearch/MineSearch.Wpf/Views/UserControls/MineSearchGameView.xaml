@@ -30,17 +30,17 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid
-                        Width="36"
+                        Width="50"
                         Height="30"
                         Margin="10,0,0,0"
                         HorizontalAlignment="Left"
                         Background="Black">
                         <wpf:DigitalDisplayView
-                            Width="30"
+                            Width="44"
                             Height="24"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Digits="2"
+                            Digits="3"
                             Value="{Binding Game.RemainingFlagCount, Mode=TwoWay}" />
                     </Grid>
                     <Button
