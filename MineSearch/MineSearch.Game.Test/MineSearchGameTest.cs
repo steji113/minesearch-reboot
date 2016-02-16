@@ -36,8 +36,6 @@ namespace MineSearch.Game.Test
             _game.FlagCell(cellToFlag.Coordinates);
 
             Assert.IsTrue(cellToFlag.Flagged);
-            Assert.AreEqual(_game.FlaggedCells.Count(), 1);
-            Assert.AreEqual(_game.FlaggedCells.First().Coordinates, cellToFlag.Coordinates);
             Assert.IsFalse(_game.GameOver);
             Assert.IsFalse(_game.GameWon);
         }
@@ -49,8 +47,6 @@ namespace MineSearch.Game.Test
             _game.FlagCell(cellToFlag.Coordinates);
 
             Assert.IsTrue(cellToFlag.Flagged);
-            Assert.AreEqual(_game.FlaggedCells.Count(), 1);
-            Assert.AreEqual(_game.FlaggedCells.First().Coordinates, cellToFlag.Coordinates);
             Assert.IsFalse(_game.GameOver);
             Assert.IsFalse(_game.GameWon);
         }

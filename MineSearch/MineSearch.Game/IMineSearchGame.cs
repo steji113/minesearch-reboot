@@ -34,11 +34,6 @@ namespace MineSearch.Game
         int RemainingFlagCount { get; }
 
         /// <summary>
-        /// Collection of cells that have been flagged.
-        /// </summary>
-        IEnumerable<ICell> FlaggedCells { get; }
-
-        /// <summary>
         /// Whether or not the game is over.
         /// </summary>
         bool GameOver { get; }

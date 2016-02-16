@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using MineSearch.Common;
 
 namespace MineSearch.Game
@@ -43,11 +42,6 @@ namespace MineSearch.Game
                 }
             }
         }
-
-        /// <summary>
-        /// Collection of cells that have been flagged.
-        /// </summary>
-        public IEnumerable<ICell> FlaggedCells { get { return Cells.Where(cell => cell.Flagged); } }
 
         /// <summary>
         /// Whether or not the game is over.
