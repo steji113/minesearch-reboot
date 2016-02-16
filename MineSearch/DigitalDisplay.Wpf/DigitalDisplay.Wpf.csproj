@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\ValueToDigitTemplateConverter.cs" />
+    <Compile Include="Models\Digits.cs" />
     <Compile Include="ViewModels\DigitViewModel.cs" />
     <Compile Include="DigitalDisplayView.xaml.cs">
       <DependentUpon>DigitalDisplayView.xaml</DependentUpon>

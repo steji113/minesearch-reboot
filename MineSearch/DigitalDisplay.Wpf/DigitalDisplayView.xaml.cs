@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using DigitalDisplay.Wpf.Models;
 using DigitalDisplay.Wpf.ViewModels;
 
 namespace DigitalDisplay.Wpf
@@ -25,7 +26,7 @@ namespace DigitalDisplay.Wpf
         /// Value dependency property.
         /// </summary>
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof (uint), typeof (DigitalDisplayView),
+            DependencyProperty.Register("Value", typeof (int), typeof (DigitalDisplayView),
                 new PropertyMetadata(OnValueChanged));
 
         #endregion
@@ -35,11 +36,15 @@ namespace DigitalDisplay.Wpf
         /// <summary>
         /// Value to display.
         /// </summary>
-        public uint Value
+        public int Value
         {
-            get { return (uint) GetValue(ValueProperty); }
+            get { return (int) GetValue(ValueProperty); }
             set
             {
+                if (value < _minValue)
+                {
+                    value = _minValue;
+                }
                 if (value > _maxValue)
                 {
                     value = _maxValue;
@@ -47,11 +52,10 @@ namespace DigitalDisplay.Wpf
 
                 SetValue(ValueProperty, value);
 
-                var valueString = value.ToString(_digitsFormat);
-                for (int i = 0; i < Digits; i++)
+                var values = GetDigitValues(value, _digitsFormat);
+                for (int i = 0; i < DigitViewModels.Count; i++)
                 {
-                    var digit = uint.Parse(valueString.Substring(i, 1));
-                    DigitViewModels[i].Value = digit;
+                    DigitViewModels[i].Value = values[i];
                 }
             }
         }
@@ -75,8 +79,9 @@ namespace DigitalDisplay.Wpf
                     _digits = value;
                     // Create the format string to achieve the correct number of leading zeros.
                     _digitsFormat = string.Format("D{0}", _digits);
-                    // Calculate the max value we can have.
-                    _maxValue = ((uint)Math.Pow(10, _digits)) - 1;
+                    // Calculate the min and max value we can have.
+                    _minValue = -((int) Math.Pow(10, _digits - 1)) + 1;
+                    _maxValue = ((int)Math.Pow(10, _digits)) - 1;
                     // Create a view model for each digit.
                     DigitViewModels.Clear();
                     for (int i = 0; i < _digits; i++)
@@ -111,14 +116,37 @@ namespace DigitalDisplay.Wpf
             {
                 return;
             }
-            control.Value = (uint) e.NewValue;
+            control.Value = (int) e.NewValue;
+        }
+
+        private static DigitValue[] GetDigitValues(int value, string format)
+        {
+            var valueStr = value.ToString(format);
+            if (value < 0)
+            {
+                // Lop off negative sign from string
+                valueStr = valueStr.Substring(1);
+            }
+            var digits = new DigitValue[valueStr.Length];
+            int i = 0;
+            if (value < 0)
+            {
+                // Pad the array with a dash if the value is negative
+                digits[i++] = DigitValue.Dash;
+            }
+            for (; i < valueStr.Length; i++)
+            {
+                digits[i] = (DigitValue) Convert.ToInt32(valueStr.Substring(i, 1));
+            }
+            return digits;
         }
 
         #region Fields
 
         private uint _digits;
         private string _digitsFormat;
-        private uint _maxValue;
+        private int _minValue;
+        private int _maxValue;
 
         #endregion
     }
