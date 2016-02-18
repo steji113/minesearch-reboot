@@ -8,7 +8,6 @@ namespace MineSearch.Game.Test
     [TestClass]
     public class GameSettingsTest
     {
-
         [TestInitialize]
         public void TestInitialize()
         {
@@ -81,7 +80,10 @@ namespace MineSearch.Game.Test
             Assert.AreEqual(gameSettings1.UseQuestionableState, gameSettings2.UseQuestionableState);
         }
 
+        #region Fields
+
         private IPointGenerator _generator;
 
+        #endregion
     }
 }
