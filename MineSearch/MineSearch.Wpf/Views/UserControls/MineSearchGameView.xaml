@@ -41,7 +41,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Digits="3"
-                            Value="{Binding Game.RemainingFlagCount, Mode=TwoWay}" />
+                            Value="{Binding Game.RemainingMineCount, Mode=TwoWay}" />
                     </Grid>
                     <Button
                         Grid.Column="1"

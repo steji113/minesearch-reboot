@@ -107,34 +107,34 @@ namespace MineSearch.Game.Test
         }
 
         [TestMethod]
-        public void TestRemainingFlagCount()
+        public void TestRemainingMineCount()
         {
-            int expectedFlagCount = _game.MineCount;
-            Assert.AreEqual(expectedFlagCount, _game.RemainingFlagCount);
+            int expectedMineCount = _game.MineCount;
+            Assert.AreEqual(expectedMineCount, _game.RemainingMineCount);
 
             var safeCoordinates = _game.Cells.
                     Where(cell => cell is SafeCell).
                     Select(cell => cell.Coordinates).
-                    Take(_game.MineCount).
                     ToList();
+
             // Flag safe cells
             foreach (var coordinate in safeCoordinates)
             {
                 _game.FlagCell(coordinate);
-                expectedFlagCount--;
-                Assert.AreEqual(expectedFlagCount, _game.RemainingFlagCount);
+                expectedMineCount--;
+                Assert.AreEqual(expectedMineCount, _game.RemainingMineCount);
             }
-            Assert.AreEqual(0, expectedFlagCount);
-            Assert.AreEqual(0, _game.RemainingFlagCount);
+
             // Remove flags
             foreach (var coordinate in safeCoordinates)
             {
                 _game.RemoveFlag(coordinate);
-                expectedFlagCount++;
-                Assert.AreEqual(expectedFlagCount, _game.RemainingFlagCount);
+                expectedMineCount++;
+                Assert.AreEqual(expectedMineCount, _game.RemainingMineCount);
             }
-            Assert.AreEqual(_game.MineCount, expectedFlagCount);
-            Assert.AreEqual(_game.MineCount, _game.RemainingFlagCount);
+
+            Assert.AreEqual(_game.MineCount, expectedMineCount);
+            Assert.AreEqual(_game.MineCount, _game.RemainingMineCount);
         }
 
         [TestMethod]
