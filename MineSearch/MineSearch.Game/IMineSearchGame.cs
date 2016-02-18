@@ -29,9 +29,9 @@ namespace MineSearch.Game
         int MineCount { get; }
 
         /// <summary>
-        /// Number of flags remaining.
+        /// Number of mines remaining.
         /// </summary>
-        int RemainingFlagCount { get; }
+        int RemainingMineCount { get; }
 
         /// <summary>
         /// Whether or not the game is over.
