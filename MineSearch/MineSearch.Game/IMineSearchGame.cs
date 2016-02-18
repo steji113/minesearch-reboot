@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MineSearch.Common;
+﻿using MineSearch.Common;
 
 namespace MineSearch.Game
 {
@@ -54,25 +53,29 @@ namespace MineSearch.Game
         /// Removes a flag from a cell.
         /// </summary>
         /// <param name="point">Coordinates of cell to remove flag from.</param>
-        void RemoveFlag(Point point);
+        /// <returns>True if the cell has been unflagged, false otherwise.</returns>
+        bool RemoveFlag(Point point);
 
         /// <summary>
         /// Marks a cell as questionable.
         /// </summary>
         /// <param name="point">Coordinates of cell to mark as questionable.</param>
-        void MarkCellQuestionable(Point point);
+        /// <returns>True if the cell has been marked questionable, false otherwise.</returns>
+        bool MarkCellQuestionable(Point point);
 
         /// <summary>
         /// Removes the questionable state from a cell.
         /// </summary>
         /// <param name="point">Coordinates of cell to remove questionable state from.</param>
-        void RemoveQuestionable(Point point);
+        /// <returns>True if the cell has been unmarked questionable, false otherwise.</returns>
+        bool RemoveQuestionable(Point point);
 
         /// <summary>
         /// Reveals a cell.
         /// </summary>
         /// <param name="point">Coordinates of cell to reveal.</param>
-        void RevealCell(Point point);
+        /// <returns>True if the cell has been revealed, false otherwise.</returns>
+        bool RevealCell(Point point);
 
         /// <summary>
         /// Performs a cascading reveal.
