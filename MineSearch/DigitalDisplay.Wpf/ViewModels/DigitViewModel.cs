@@ -1,4 +1,5 @@
-﻿using MineSearch.Common.ViewModels;
+﻿using DigitalDisplay.Wpf.Models;
+using MineSearch.Common.ViewModels;
 
 namespace DigitalDisplay.Wpf.ViewModels
 {
@@ -15,15 +16,11 @@ namespace DigitalDisplay.Wpf.ViewModels
         /// <summary>
         /// Digit value.
         /// </summary>
-        public uint Value
+        public DigitValue Value
         {
             get { return _value; }
             set
             {
-                if (value > MaxValue)
-                {
-                    value = 0;
-                }
                 if (_value != value)
                 {
                     _value = value;
@@ -44,7 +41,7 @@ namespace DigitalDisplay.Wpf.ViewModels
 
         #region Fields
 
-        private uint _value;
+        private DigitValue _value;
 
         #endregion
     }

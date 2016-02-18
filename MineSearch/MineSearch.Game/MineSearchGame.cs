@@ -96,7 +96,7 @@ namespace MineSearch.Game
             {
                 return false;
             }
-            if (!cell.Revealed && !cell.Flagged && RemainingFlagCount > 0)
+            if (!cell.Revealed && !cell.Flagged)
             {
                 cell.Flagged = true;
                 RemainingFlagCount--;
