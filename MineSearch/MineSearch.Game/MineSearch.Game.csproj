@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseCell.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="GameSettings.cs" />
     <Compile Include="ICell.cs" />
     <Compile Include="IGameSettings.cs" />

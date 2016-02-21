@@ -207,11 +207,11 @@ namespace MineSearch.Game
             var cell = Cells[point.X, point.Y];
             if (cell != null)
             {
-                var adjacentMineCount = Cells.GetAdjacentCells(cell).Count(c => c is MineCell);
+                var adjacentMineCount = Cells.GetAdjacentCells(point).Count(c => c is MineCell);
                 if (adjacentMineCount == 0)
                 {
                     var adjacent =
-                        Cells.GetAdjacentCells(cell).Where(c => !c.Revealed && !c.Flagged).Select(
+                        Cells.GetAdjacentCells(point).Where(c => !c.Revealed && !c.Flagged).Select(
                             c => c.Coordinates);
                     foreach (var adjacentPoint in adjacent)
                     {

@@ -147,67 +147,6 @@ namespace MineSearch.Common
             return GetEnumerator();
         }
 
-        /// <summary>
-        /// Computes the cells adjacent to the specified item.
-        /// </summary>
-        /// <param name="item">The item to find.</param>
-        /// <returns><see cref="IEnumerable{T}"/> containing adjacent cells.</returns>
-        public IEnumerable<T> GetAdjacentCells(T item)
-        {
-            int index = IndexOf(item);
-
-            // Validate index
-            if (index < 0)
-            {
-                yield break;
-            }
-
-            var point = Point.FromIndex(index, Columns);
-            int x = point.X;
-            int y = point.Y;
-
-            // Up left
-            if (x > 0 && y > 0)
-            {
-                yield return this[x - 1, y - 1];
-            }
-            // Up
-            if (y > 0)
-            {
-                yield return this[x, y - 1];
-            }
-            // Up right
-            if (x < Columns - 1 && y > 0)
-            {
-                yield return this[x + 1, y - 1];
-            }
-            // Left
-            if (x > 0)
-            {
-                yield return this[x - 1, y];
-            }
-            // Right
-            if (x < Columns - 1)
-            {
-                yield return this[x + 1, y];
-            }
-            // Down left
-            if (x > 0 && y < Rows - 1)
-            {
-                yield return this[x - 1, y + 1];
-            }
-            // Down
-            if (y < Rows - 1)
-            {
-                yield return this[x, y + 1];
-            }
-            // Down right
-            if (x < Columns - 1 && y < Rows - 1)
-            {
-                yield return this[x + 1, y + 1];
-            }
-        }
-
         private void ValidateCoordinates(int x, int y)
         {
             if (y < 0 || y >= Rows)

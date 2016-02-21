@@ -34,5 +34,33 @@ namespace MineSearch.Game.Test
             Assert.IsTrue(desiredCoords.ContainsAll(actualCoords));
         }
 
+        [TestMethod]
+        public void TestMatrixAdjacent()
+        {
+            IMatrix<ICell> matrix = new Matrix<ICell>(3, 3);
+            var items = new List<ICell>(9);
+            for (int i = 0; i < items.Capacity; i++)
+            {
+                items.Add(new MineCell(Point.FromIndex(i, matrix.Columns)));
+            }
+
+            var index = 0;
+            for (int y = 0; y < matrix.Rows; y++)
+            {
+                int x;
+                for (x = 0; x < matrix.Columns; x++)
+                {
+                    matrix[x, y] = items[index++];
+                }
+            }
+
+            var middleCell = matrix[1, 1];
+            int middleIndex = matrix.IndexOf(middleCell);
+            items.RemoveAt(middleIndex);
+
+            var adjacentCells = matrix.GetAdjacentCells(middleCell.Coordinates);
+            Assert.IsTrue(items.SequenceEqual(adjacentCells));
+        }
+
     }
 }

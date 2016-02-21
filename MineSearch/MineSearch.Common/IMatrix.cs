@@ -47,12 +47,5 @@ namespace MineSearch.Common
         /// </summary>
         /// <param name="item"></param>
         void AddItem(T item);
-
-        /// <summary>
-        /// Computes the cells adjacent to the specified item.
-        /// </summary>
-        /// <param name="item">The item to find.</param>
-        /// <returns><see cref="IEnumerable{T}"/> containing adjacent cells.</returns>
-        IEnumerable<T> GetAdjacentCells(T item);
     }
 }

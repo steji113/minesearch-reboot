@@ -35,58 +35,6 @@ namespace MineSearch.Common.Test
         }
 
         [TestMethod]
-        public void TestAdjacent()
-        {
-            IMatrix<string> matrix = new Matrix<string>(3, 3);
-            List<string> items = new List<string>(9);
-            for (int i = 0; i < items.Capacity; i++)
-            {
-                items.Add(string.Format("{0}", i));
-            }
-
-            var index = 0;
-            for (int y = 0; y < matrix.Rows; y++)
-            {
-                int x;
-                for (x = 0; x < matrix.Columns; x++)
-                {
-                    matrix[x, y] = items[index++];
-                }
-            }
-
-            var middleCell = matrix[1, 1];
-            int middleIndex = matrix.IndexOf(middleCell);
-            items.RemoveAt(middleIndex);
-
-            var adjacentCells = matrix.GetAdjacentCells(middleCell);
-            Assert.IsTrue(items.SequenceEqual(adjacentCells));
-        }
-
-        [TestMethod]
-        public void TestAdjacentNonExistentCell()
-        {
-            IMatrix<string> matrix = new Matrix<string>(3, 3);
-            List<string> items = new List<string>(9);
-            for (int i = 0; i < items.Capacity; i++)
-            {
-                items.Add(string.Format("{0}", i));
-            }
-
-            var index = 0;
-            for (int y = 0; y < matrix.Rows; y++)
-            {
-                int x;
-                for (x = 0; x < matrix.Columns; x++)
-                {
-                    matrix[x, y] = items[index++];
-                }
-            }
-
-            var adjacentCells = matrix.GetAdjacentCells(null);
-            Assert.IsTrue(!adjacentCells.Any());
-        }
-
-        [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestXCoordOutOfBounds()
         {

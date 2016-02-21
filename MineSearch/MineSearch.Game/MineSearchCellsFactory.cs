@@ -46,7 +46,7 @@ namespace MineSearch.Game
             // Calculate each cell's adjacent mine count.
             foreach (var cell in cells)
             {
-                cell.AdjacentMineCount = cells.GetAdjacentCells(cell).Count(c => c is MineCell);
+                cell.AdjacentMineCount = cells.GetAdjacentCells(cell.Coordinates).Count(c => c is MineCell);
             }
 
             return cells;
